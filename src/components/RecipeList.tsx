@@ -4,10 +4,11 @@ import RecipeCard from "./RecipeCard";
 
 interface RecipeListProps {
     recipes: Recipe[];
+    selectedRecipe: Recipe | null;
     setSelectedRecipe: (recipe: Recipe) => void;
 }
 
-function RecipeList({ recipes, setSelectedRecipe }: RecipeListProps) {
+function RecipeList({ recipes, selectedRecipe, setSelectedRecipe }: RecipeListProps) {
     return (
         <div className="recipe-list">
             {recipes.map((recipe) => (
@@ -18,6 +19,7 @@ function RecipeList({ recipes, setSelectedRecipe }: RecipeListProps) {
                         logger.info(`clicked ${recipe.title}`);
                         setSelectedRecipe(recipe);
                     }}
+                    selected={selectedRecipe?.id === recipe.id}
                 />
             ))}
         </div>

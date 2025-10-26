@@ -38,6 +38,10 @@
     background: #e9ecef;
 }
 
+.recipe-card.selected {
+    background-color: #e0f7fa;
+}
+
 /* Bottom button area */
 .sidebar-footer {
     border-top: 1px solid #ddd;

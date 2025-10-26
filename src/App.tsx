@@ -24,6 +24,7 @@ function App() {
             <aside className="sidebar">
                 <RecipeList
                     recipes={recipes}
+                    selectedRecipe={selectedRecipe}
                     setSelectedRecipe={setSelectedRecipe}
                 />
 
