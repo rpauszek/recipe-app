@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-
-import { Recipe, RecipeCollection } from "../types";
+import { Recipe } from "../types";
 import { logger } from "../utils";
 import RecipeCard from "./RecipeCard";
 
-function RecipeList() {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
+interface RecipeListProps {
+    recipes: Recipe[];
+    setSelectedRecipe: (recipe: Recipe) => void;
+}
 
-    useEffect(() => {
-        async function fetchRecipes() {
-            const result = await invoke<string>("get_recipes");
-            const collection: RecipeCollection = JSON.parse(result);
-            setRecipes(collection.recipes);
-        }
-        fetchRecipes();
-    }, []);
-
+function RecipeList({ recipes, setSelectedRecipe }: RecipeListProps) {
     return (
         <div className="recipe-list">
             {recipes.map((recipe) => (
@@ -24,7 +15,10 @@ function RecipeList() {
                     key={recipe.id}
                     title={recipe.title}
                     description={recipe.description}
-                    onClick={() => logger.info(`clicked ${recipe.title}`)}
+                    onClick={() => {
+                        logger.info(`clicked ${recipe.title}`);
+                        setSelectedRecipe(recipe);
+                    }}
                 />
             ))}
         </div>
