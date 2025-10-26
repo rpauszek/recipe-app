@@ -45,6 +45,23 @@
                     "Serve sauce over pasta."
                 ]
             }
+        },
+        {
+            "id": 2,
+            "title": "Pozole",
+            "description": "for when hungover",
+            "cuisine": "mexican",
+            "ingredients": {
+                "main": [
+                    {"item": "pork", "quantity": "1", "unit": "kg"}
+                ]
+            },
+            "steps": {
+                "main": [
+                    "make the pozole.",
+                    "eat the pozole."
+                ]
+            }
         }
     ]
 }

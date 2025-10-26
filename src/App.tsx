@@ -3,11 +3,24 @@ import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "./types";
 import RecipeList from "./components/RecipeList";
 import RecipeView from "./components/RecipeView";
+import RecipeEditor from "./components/RecipeEditor";
 import "./App.css";
+import { logger } from "./utils";
 
 function App() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+    const [isEditingNew, setIsEditingNew] = useState(false);
+
+    const onSaveRecipe = () => {
+        setIsEditingNew(false);
+        logger.info("saving");
+    };
+
+    const onCancelRecipe = () => {
+        setIsEditingNew(false);
+        logger.info("canceling");
+    };
 
     useEffect(() => {
         async function fetchRecipes() {
@@ -30,13 +43,28 @@ function App() {
 
                 {/* Fixed bottom button */}
                 <div className="sidebar-footer">
-                    <button className="new-recipe-btn">+ New Recipe</button>
+                    <button
+                        className="new-recipe-btn"
+                        onClick={() => {
+                            setIsEditingNew(true);
+                            logger.info("clicked");
+                        }}
+                    >
+                        + New Recipe
+                    </button>
                 </div>
             </aside>
 
             {/* Main content */}
             <main className="content">
-                <RecipeView recipe={selectedRecipe} />
+                {isEditingNew ? (
+                    <RecipeEditor
+                        onSave={onSaveRecipe}
+                        onCancel={onCancelRecipe}
+                    />
+                ) : (
+                    <RecipeView recipe={selectedRecipe} />
+                )}
             </main>
         </div>
     );
