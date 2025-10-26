@@ -1,14 +1,16 @@
+import { Recipe } from "../types"
+import { cuisineFlags } from "../utils";
+
 interface RecipeCardProps {
-    title: string;
-    description: string;
+    recipe: Recipe;
     onClick?: () => void; // optional click handler
 }
 
-function RecipeCard({ title, description, onClick }: RecipeCardProps) {
+function RecipeCard({ recipe, onClick }: RecipeCardProps) {
     return (
         <div className="recipe-card" onClick={onClick}>
-            <h3>{title}</h3>
-            <p>{description}</p>
+            <h3>{recipe.title} {cuisineFlags[recipe.cuisine]}</h3>
+            <p>{recipe.description}</p>
         </div>
     );
 }

@@ -13,8 +13,7 @@ function RecipeList({ recipes, setSelectedRecipe }: RecipeListProps) {
             {recipes.map((recipe) => (
                 <RecipeCard
                     key={recipe.id}
-                    title={recipe.title}
-                    description={recipe.description}
+                    recipe={recipe}
                     onClick={() => {
                         logger.info(`clicked ${recipe.title}`);
                         setSelectedRecipe(recipe);
