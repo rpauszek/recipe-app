@@ -26,20 +26,28 @@
 
 /* Recipe cards */
 .recipe-card {
-    background: #f1f3f5;
-    border-radius: 8px;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    transition: background 0.15s ease;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .recipe-card:hover {
-    background: #e9ecef;
+  background-color: #f0f0f0;
+  transform: translateX(2px); /* subtle hover shift */
 }
 
 .recipe-card.selected {
-    background-color: #e0f7fa;
+  background-color: #e0f7fa; /* highlight color */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* slight scale up */
+  border-color: #00acc1; /* accent border color */
 }
 
 /* Bottom button area */
