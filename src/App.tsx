@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 
+import { logger } from "./utils";
 import RecipeCard from "./RecipeCard";
 
 import "./App.css";
@@ -16,7 +17,7 @@ function App() {
                             key={i}
                             title={"recipe"}
                             description={"description"}
-                            onClick={() => console.log(`clicked ${i}`)}
+                            onClick={() => logger.info(`clicked ${i}`)}
                         />
                     ))}
                 </div>

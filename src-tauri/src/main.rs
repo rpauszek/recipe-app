@@ -2,5 +2,10 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
+    tauri::Builder::default()
+        .plugin(tauri_plugin_log::Builder::new().build())
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+
     recipe_app_lib::run()
 }
