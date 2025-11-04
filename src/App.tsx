@@ -55,10 +55,7 @@ function App() {
             {/* Main content */}
             <main className="content">
                 {isEditingNew ? (
-                    <RecipeEditor
-                        onSave={onSaveRecipe}
-                        onCancel={onCancelRecipe}
-                    />
+                    <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />
                 ) : (
                     <RecipeView recipe={selectedRecipe} />
                 )}

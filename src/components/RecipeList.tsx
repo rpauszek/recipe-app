@@ -9,12 +9,7 @@ interface RecipeListProps {
     isEditingNew: boolean;
 }
 
-function RecipeList({
-    recipes,
-    selectedRecipe,
-    setSelectedRecipe,
-    isEditingNew,
-}: RecipeListProps) {
+function RecipeList({ recipes, selectedRecipe, setSelectedRecipe, isEditingNew }: RecipeListProps) {
     const className = "recipe-list" + ` ${isEditingNew ? "disabled" : ""}`;
 
     return (

@@ -5,10 +5,7 @@ interface NewRecipeButtonProps {
     setIsEditingNew: (value: boolean) => void;
 }
 
-function NewRecipeButton({
-    isEditingNew,
-    setIsEditingNew,
-}: NewRecipeButtonProps) {
+function NewRecipeButton({ isEditingNew, setIsEditingNew }: NewRecipeButtonProps) {
     const className = "new-recipe-btn" + ` ${isEditingNew ? "disabled" : ""}`;
 
     return (

@@ -14,8 +14,9 @@ fn main() {
         .plugin(tauri_plugin_log::Builder::new().build())
         .setup(|_app| {
             // This runs before the window opens
-            let recipes_json = recipes::load_dev_recipes();
-            log::info!("Loaded dev recipes: {:#?}", recipes_json);
+            // todo: remove debug logging
+            // let recipes_json = recipes::load_dev_recipes();
+            // log::info!("Loaded dev recipes: {:#?}", recipes_json);
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![get_recipes])

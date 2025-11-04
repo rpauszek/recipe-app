@@ -8,16 +8,9 @@ interface RecipeCardProps {
     isEditingNew: boolean;
 }
 
-function RecipeCard({
-    recipe,
-    onClick,
-    selected,
-    isEditingNew,
-}: RecipeCardProps) {
+function RecipeCard({ recipe, onClick, selected, isEditingNew }: RecipeCardProps) {
     const className =
-        "recipe-card" +
-        ` ${selected ? "selected" : ""}` +
-        ` ${isEditingNew ? "disabled" : ""}`;
+        "recipe-card" + ` ${selected ? "selected" : ""}` + ` ${isEditingNew ? "disabled" : ""}`;
 
     return (
         <div className={className} onClick={isEditingNew ? () => {} : onClick}>
