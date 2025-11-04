@@ -39,6 +39,7 @@ function App() {
                     recipes={recipes}
                     selectedRecipe={selectedRecipe}
                     setSelectedRecipe={setSelectedRecipe}
+                    isEditingNew={isEditingNew}
                 />
 
                 {/* Fixed bottom button */}

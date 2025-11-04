@@ -6,11 +6,19 @@ interface RecipeListProps {
     recipes: Recipe[];
     selectedRecipe: Recipe | null;
     setSelectedRecipe: (recipe: Recipe) => void;
+    isEditingNew: boolean;
 }
 
-function RecipeList({ recipes, selectedRecipe, setSelectedRecipe }: RecipeListProps) {
+function RecipeList({
+    recipes,
+    selectedRecipe,
+    setSelectedRecipe,
+    isEditingNew,
+}: RecipeListProps) {
+    const className = "recipe-list" + ` ${isEditingNew ? "disabled" : ""}`;
+
     return (
-        <div className="recipe-list">
+        <div className={className}>
             {recipes.map((recipe) => (
                 <RecipeCard
                     key={recipe.id}
@@ -20,6 +28,7 @@ function RecipeList({ recipes, selectedRecipe, setSelectedRecipe }: RecipeListPr
                         setSelectedRecipe(recipe);
                     }}
                     selected={selectedRecipe?.id === recipe.id}
+                    isEditingNew={isEditingNew}
                 />
             ))}
         </div>

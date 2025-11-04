@@ -1,16 +1,29 @@
-import { Recipe } from "../types"
+import { Recipe } from "../types";
 import { cuisineFlags } from "../utils";
 
 interface RecipeCardProps {
     recipe: Recipe;
     onClick?: () => void; // optional click handler
-    selected?: boolean;
+    selected: boolean;
+    isEditingNew: boolean;
 }
 
-function RecipeCard({ recipe, onClick, selected }: RecipeCardProps) {
+function RecipeCard({
+    recipe,
+    onClick,
+    selected,
+    isEditingNew,
+}: RecipeCardProps) {
+    const className =
+        "recipe-card" +
+        ` ${selected ? "selected" : ""}` +
+        ` ${isEditingNew ? "disabled" : ""}`;
+
     return (
-        <div className={`recipe-card ${selected ? "selected" : ""}`} onClick={onClick}>
-            <h3>{recipe.title} {cuisineFlags[recipe.cuisine]}</h3>
+        <div className={className} onClick={isEditingNew ? () => {} : onClick}>
+            <h3>
+                {recipe.title} {cuisineFlags[recipe.cuisine]}
+            </h3>
             <p>{recipe.description}</p>
         </div>
     );
