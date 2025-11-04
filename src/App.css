@@ -79,7 +79,11 @@
     transition: background 0.15s ease;
 }
 
-.new-recipe-btn:hover {
+.new-recipe-btn.disabled {
+    background: #f0f0f0;
+}
+
+.new-recipe-btn:hover:not(.disabled) {
     background: #047857;
 }
 

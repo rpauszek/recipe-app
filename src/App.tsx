@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "./types";
+import NewRecipeButton from "./components/NewRecipeButton";
 import RecipeList from "./components/RecipeList";
 import RecipeView from "./components/RecipeView";
 import RecipeEditor from "./components/RecipeEditor";
@@ -44,15 +45,10 @@ function App() {
 
                 {/* Fixed bottom button */}
                 <div className="sidebar-footer">
-                    <button
-                        className="new-recipe-btn"
-                        onClick={() => {
-                            setIsEditingNew(true);
-                            logger.info("clicked");
-                        }}
-                    >
-                        + New Recipe
-                    </button>
+                    <NewRecipeButton
+                        isEditingNew={isEditingNew}
+                        setIsEditingNew={setIsEditingNew}
+                    />
                 </div>
             </aside>
 
