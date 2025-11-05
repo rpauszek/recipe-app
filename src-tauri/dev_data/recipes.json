@@ -1,0 +1,67 @@
+{
+    "recipes": [
+        {
+            "id": 0,
+            "title": "Spaghetti Bolognese",
+            "description": "Classic Italian pasta with meat sauce",
+            "cuisine": "italian",
+            "ingredients": {
+                "main": [
+                    { "item": "spaghetti", "quantity": "300", "unit": "g" },
+                    { "item": "ground beef", "quantity": "300", "unit": "g" }
+                ]
+            },
+            "steps": {
+                "main": [
+                    "Cook spaghetti according to package instructions.",
+                    "Brown the beef in a pan.",
+                    "Add tomato sauce and simmer 15 minutes.",
+                    "Serve sauce over pasta."
+                ]
+            }
+        },
+        {
+            "id": 1,
+            "title": "Green Curry",
+            "description": "my favorite thai dish",
+            "cuisine": "thai",
+            "ingredients": {
+                "curry": [
+                    { "item": "thai basil", "quantity": "1", "unit": "bunch" },
+                    { "item": "coconut milk", "quantity": "250", "unit": "mL" }
+                ],
+                "main": [
+                    {"item": "rice", "quantity": "1", "unit": "c"}
+                ]
+            },
+            "steps": {
+                "curry": [
+                    "make the curry"
+                ],
+                "main": [
+                    "Cook spaghetti according to package instructions.",
+                    "Brown the beef in a pan.",
+                    "Add tomato sauce and simmer 15 minutes.",
+                    "Serve sauce over pasta."
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "title": "Pozole",
+            "description": "for when hungover",
+            "cuisine": "mexican",
+            "ingredients": {
+                "main": [
+                    {"item": "pork", "quantity": "1", "unit": "kg"}
+                ]
+            },
+            "steps": {
+                "main": [
+                    "make the pozole.",
+                    "eat the pozole."
+                ]
+            }
+        }
+    ]
+}
