@@ -1,4 +1,4 @@
-import { Ingredient } from "../types";
+import { Ingredient } from "../../types";
 
 interface IngredientsViewProps {
     title: string;

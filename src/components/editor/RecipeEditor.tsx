@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cuisineFlags } from "../utils";
+import { cuisineFlags } from "../../utils";
 import IngredientsListEditor from "./IngredientsListEditor";
 
 interface RecipeEditorProps {
