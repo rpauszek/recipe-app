@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "./types";
-import NewRecipeButton from "./components/sidebar/NewRecipeButton";
-import RecipeList from "./components/sidebar/RecipeList";
 import RecipeView from "./components/view/RecipeView";
 import RecipeEditor from "./components/editor/RecipeEditor";
+import SideBar from "./components/sidebar/SideBar";
 import "./styles/App.css";
 import { logger } from "./utils";
 
@@ -34,25 +33,14 @@ function App() {
 
     return (
         <div className="app">
-            {/* Left sidebar */}
-            <aside className="sidebar">
-                <RecipeList
-                    recipes={recipes}
-                    selectedRecipe={selectedRecipe}
-                    setSelectedRecipe={setSelectedRecipe}
-                    isEditingNew={isEditingNew}
-                />
+            <SideBar
+                recipes={recipes}
+                selectedRecipe={selectedRecipe}
+                setSelectedRecipe={setSelectedRecipe}
+                isEditingNew={isEditingNew}
+                setIsEditingNew={setIsEditingNew}
+            />
 
-                {/* Fixed bottom button */}
-                <div className="sidebar-footer">
-                    <NewRecipeButton
-                        isEditingNew={isEditingNew}
-                        setIsEditingNew={setIsEditingNew}
-                    />
-                </div>
-            </aside>
-
-            {/* Main content */}
             <main className="content">
                 {isEditingNew ? (
                     <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />

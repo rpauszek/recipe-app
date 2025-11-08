@@ -18,5 +18,6 @@ export interface RecipeCollection {
 }
 
 // alias React events
-export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>
-export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement>
+export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>;
+export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement>;
+export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>
