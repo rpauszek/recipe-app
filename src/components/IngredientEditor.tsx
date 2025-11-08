@@ -4,6 +4,7 @@ interface IngredientEditorCallbacks {
     handleChange: (index: number, field: keyof Ingredient, value: string) => void;
     addIngredient: (index: number) => void;
     removeIngredient: (index: number) => void;
+    handleTabOnLastIngredient: (evt: React.KeyboardEvent<HTMLInputElement>, index: number) => void;
 }
 
 interface IngredientEditorProps {
@@ -25,6 +26,7 @@ function IngredientEditor({ index, ingredient, callbacks }: IngredientEditorProp
                 value={ingredient.item}
                 style={{ flexGrow: 1, marginRight: 4 }}
                 onChange={(evt) => callbacks.handleChange(index, "item", evt.target.value)}
+                onKeyDown={(evt) => callbacks.handleTabOnLastIngredient(evt, index)}
             />
             <button onClick={() => callbacks.addIngredient(index)}>➕</button>
             <button onClick={() => callbacks.removeIngredient(index)}>❌</button>

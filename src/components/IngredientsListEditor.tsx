@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Ingredient } from "../types";
 import IngredientEditor from "./IngredientEditor";
+import { logger } from "../utils";
 
 function makeBlankIngredient(): Ingredient {
     return { quantity: "", unit: "", item: "" };
@@ -18,13 +19,18 @@ function IngredientsListEditor() {
         setIngredients(updater);
     };
 
-    const addIngredient = (index: number) => {
-        index += 1;
-        const updater = (prev: Ingredient[]) => [
-            ...prev.slice(0, index),
-            makeBlankIngredient(),
-            ...prev.slice(index),
-        ];
+    const addIngredient = (index?: number) => {
+        let updater: (prev: Ingredient[]) => Ingredient[];
+        if (index !== undefined) {
+            index += 1;
+            updater = (prev) => [
+                ...prev.slice(0, index),
+                makeBlankIngredient(),
+                ...prev.slice(index),
+            ];
+        } else {
+            updater = (prev) => [...prev, makeBlankIngredient()];
+        }
         setIngredients(updater);
     };
 
@@ -33,10 +39,20 @@ function IngredientsListEditor() {
         setIngredients(updater);
     };
 
+    const handleTabOnLastIngredient = (
+        evt: React.KeyboardEvent<HTMLInputElement>,
+        index: number
+    ) => {
+        if (evt.key === "Tab" && !evt.shiftKey && index === ingredients.length - 1) {
+            addIngredient();
+        }
+    };
+
     const callbacks = {
         handleChange: handleChange,
         addIngredient: addIngredient,
         removeIngredient: removeIngredient,
+        handleTabOnLastIngredient: handleTabOnLastIngredient,
     };
 
     return (
