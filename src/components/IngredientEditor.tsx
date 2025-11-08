@@ -1,10 +1,10 @@
-import { Ingredient } from "../types";
+import { Ingredient, InputChangeEvt, InputKeyBoardEvt } from "../types";
 
 interface IngredientEditorCallbacks {
-    handleChange: (index: number, field: keyof Ingredient, value: string) => void;
+    handleInputChange: (index: number, field: keyof Ingredient, value: string) => void;
     addIngredient: (index: number) => void;
     removeIngredient: (index: number) => void;
-    handleTabOnLastIngredient: (evt: React.KeyboardEvent<HTMLInputElement>, index: number) => void;
+    handleTabOnLastIngredient: (evt: InputKeyBoardEvt, index: number) => void;
 }
 
 interface IngredientEditorProps {
@@ -16,6 +16,9 @@ interface IngredientEditorProps {
 
 function IngredientEditor({ index, ingredient, callbacks, inputRef }: IngredientEditorProps) {
     const widthStyle = { width: 60, marginRight: 4 };
+    const handleChange = (field: keyof Ingredient, evt: InputChangeEvt) => {
+        callbacks.handleInputChange(index, field, evt.target.value);
+    };
 
     return (
         <div style={{ display: "flex", marginBottom: 8 }}>
@@ -25,14 +28,21 @@ function IngredientEditor({ index, ingredient, callbacks, inputRef }: Ingredient
                 value={ingredient.quantity}
                 style={widthStyle}
                 ref={inputRef}
+                onChange={(evt) => handleChange("quantity", evt)}
             />
-            <input type="text" placeholder="unit" value={ingredient.unit} style={widthStyle} />
+            <input
+                type="text"
+                placeholder="unit"
+                value={ingredient.unit}
+                style={widthStyle}
+                onChange={(evt) => handleChange("unit", evt)}
+            />
             <input
                 type="text"
                 placeholder=""
                 value={ingredient.item}
                 style={{ flexGrow: 1, marginRight: 4 }}
-                onChange={(evt) => callbacks.handleChange(index, "item", evt.target.value)}
+                onChange={(evt) => handleChange("item", evt)}
                 onKeyDown={(evt) => callbacks.handleTabOnLastIngredient(evt, index)}
             />
             <button onClick={() => callbacks.addIngredient(index)}>➕</button>

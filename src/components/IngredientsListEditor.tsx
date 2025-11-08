@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Ingredient } from "../types";
+import { Ingredient, InputKeyBoardEvt } from "../types";
 import IngredientEditor from "./IngredientEditor";
-import { logger } from "../utils";
 
 function makeBlankIngredient(): Ingredient {
     return { quantity: "", unit: "", item: "" };
@@ -15,7 +14,7 @@ function IngredientsListEditor() {
         lastInputRef.current?.focus();
     }, [ingredients.length]);
 
-    const handleChange = (index: number, field: keyof Ingredient, value: string) => {
+    const handleInputChange = (index: number, field: keyof Ingredient, value: string) => {
         const updater = (prev: Ingredient[]) => {
             const newIngredients = [...prev];
             newIngredients[index][field] = value;
@@ -45,7 +44,7 @@ function IngredientsListEditor() {
     };
 
     const handleTabOnLastIngredient = (
-        evt: React.KeyboardEvent<HTMLInputElement>,
+        evt: InputKeyBoardEvt,
         index: number
     ) => {
         if (evt.key === "Tab" && !evt.shiftKey && index === ingredients.length - 1) {
@@ -55,7 +54,7 @@ function IngredientsListEditor() {
     };
 
     const callbacks = {
-        handleChange: handleChange,
+        handleInputChange: handleInputChange,
         addIngredient: addIngredient,
         removeIngredient: removeIngredient,
         handleTabOnLastIngredient: handleTabOnLastIngredient,
