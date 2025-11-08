@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cuisineFlags } from "../utils";
+import IngredientsListEditor from "./IngredientsListEditor";
 
 interface RecipeEditorProps {
     onSave: () => void;
@@ -57,6 +58,8 @@ function RecipeEditor({ onSave, onCancel }: RecipeEditorProps) {
                     {cuisineOptions}
                 </select>
             </div>
+
+            <IngredientsListEditor />
 
             <div className="combo-row">
                 <button onClick={onSave}>Save</button>
