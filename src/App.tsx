@@ -5,7 +5,7 @@ import NewRecipeButton from "./components/sidebar/NewRecipeButton";
 import RecipeList from "./components/sidebar/RecipeList";
 import RecipeView from "./components/view/RecipeView";
 import RecipeEditor from "./components/editor/RecipeEditor";
-import "./App.css";
+import "./styles/App.css";
 import { logger } from "./utils";
 
 function App() {

@@ -1,0 +1,19 @@
+.ingredients-list {
+    display: grid;
+    grid-template-columns: auto 1fr; /* qty-unit | name */
+    gap: 4px 8px;
+    align-items: baseline;
+}
+
+.ingredient-row {
+    display: contents; /* flatten into parent grid */
+}
+
+.quantity-unit-label {
+    text-align: right;
+    font-weight: bold;
+}
+
+.item-label {
+    text-align: left;
+}
