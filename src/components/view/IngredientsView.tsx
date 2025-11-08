@@ -1,5 +1,5 @@
 import { Ingredient } from "../../types";
-import "../../styles/IngredientsView.css"
+import "../../styles/IngredientsView.css";
 
 interface IngredientsViewProps {
     title: string;
@@ -9,7 +9,7 @@ interface IngredientsViewProps {
 export default function IngredientsView({ title, ingredients }: IngredientsViewProps) {
     return (
         <div>
-            <h1>{title}</h1>
+            <div className="ingredients-section-title">{title}</div>
             <div className="ingredients-list">
                 {ingredients.map((ingredient, index) => (
                     <div key={index} className="ingredient-row">

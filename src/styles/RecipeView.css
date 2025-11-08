@@ -1,4 +1,18 @@
-.content-inner {
+.recipe-content {
     max-width: 720px;
     margin: 0 auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.ingredients-content {
+    margin-top: 15px;
+}
+
+.recipe-title {
+    font-size: 16pt;
+    font-weight: 700;
+    margin: 0px;
 }
