@@ -1,10 +1,12 @@
 import { Ingredient } from "../types";
 
 interface IngredientEditorProps {
-    ingredient: Ingredient
+    index: number;
+    ingredient: Ingredient;
+    handleChange: (index: number, field: keyof Ingredient, value: string) => void;
 }
 
-function IngredientEditor({ ingredient }: IngredientEditorProps) {
+function IngredientEditor({ index, ingredient, handleChange }: IngredientEditorProps) {
     const widthStyle = { width: 60, marginRight: 4 };
 
     return (
@@ -16,6 +18,7 @@ function IngredientEditor({ ingredient }: IngredientEditorProps) {
                 placeholder=""
                 value={ingredient.item}
                 style={{ flexGrow: 1, marginRight: 4 }}
+                onChange={(evt) => handleChange(index, "item", evt.target.value)}
             />
         </div>
     );
