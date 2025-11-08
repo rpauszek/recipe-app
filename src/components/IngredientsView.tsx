@@ -7,15 +7,18 @@ interface IngredientsViewProps {
 
 export default function IngredientsView({ title, ingredients }: IngredientsViewProps) {
     return (
-        <div style={{ backgroundColor: "#e0c3e4ff" }}>
+        <div>
             <h1>{title}</h1>
-            <ul>
-                {ingredients.map((ingredient) => (
-                    <div>
-                        {ingredient.quantity} {ingredient.unit} {ingredient.item}
+            <div className="ingredients-list">
+                {ingredients.map((ingredient, index) => (
+                    <div key={index} className="ingredient-row">
+                        <div className="qty">
+                            {ingredient.quantity} {ingredient.unit}
+                        </div>
+                        <div className="item">{ingredient.item}</div>
                     </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
