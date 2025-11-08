@@ -18,22 +18,26 @@ function IngredientsListEditor() {
         setIngredients(updater);
     };
 
-    const addIngredient = (index?: number) => {
-        let updater: (prev: Ingredient[]) => Ingredient[];
-        if (index !== undefined) {
-            index += 1;
-            updater = (prev) => [
-                ...prev.slice(0, index),
-                makeBlankIngredient(),
-                ...prev.slice(index),
-            ];
-        } else {
-            updater = (prev) => [...prev, makeBlankIngredient()];
-        }
+    const addIngredient = (index: number) => {
+        index += 1;
+        const updater = (prev: Ingredient[]) => [
+            ...prev.slice(0, index),
+            makeBlankIngredient(),
+            ...prev.slice(index),
+        ];
         setIngredients(updater);
     };
 
-    const callbacks = { handleChange: handleChange, addIngredient: addIngredient };
+    const removeIngredient = (index: number) => {
+        const updater = (prev: Ingredient[]) => prev.filter((_, i) => i !== index);
+        setIngredients(updater);
+    };
+
+    const callbacks = {
+        handleChange: handleChange,
+        addIngredient: addIngredient,
+        removeIngredient: removeIngredient,
+    };
 
     return (
         <div>
