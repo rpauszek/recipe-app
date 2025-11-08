@@ -1,12 +1,17 @@
 import { Ingredient } from "../types";
 
+interface IngredientEditorCallbacks {
+    handleChange: (index: number, field: keyof Ingredient, value: string) => void;
+    addIngredient: () => void;
+}
+
 interface IngredientEditorProps {
     index: number;
     ingredient: Ingredient;
-    handleChange: (index: number, field: keyof Ingredient, value: string) => void;
+    callbacks: IngredientEditorCallbacks;
 }
 
-function IngredientEditor({ index, ingredient, handleChange }: IngredientEditorProps) {
+function IngredientEditor({ index, ingredient, callbacks }: IngredientEditorProps) {
     const widthStyle = { width: 60, marginRight: 4 };
 
     return (
@@ -18,8 +23,10 @@ function IngredientEditor({ index, ingredient, handleChange }: IngredientEditorP
                 placeholder=""
                 value={ingredient.item}
                 style={{ flexGrow: 1, marginRight: 4 }}
-                onChange={(evt) => handleChange(index, "item", evt.target.value)}
+                onChange={(evt) => callbacks.handleChange(index, "item", evt.target.value)}
             />
+            <button onClick={() => callbacks.addIngredient()}>➕</button>
+            <button>❌</button>
         </div>
     );
 }
