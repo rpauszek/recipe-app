@@ -1,5 +1,6 @@
 import { Recipe } from "../../types";
 import { cuisineFlags } from "../../utils";
+import "../../styles/RecipeCard.css"
 
 interface RecipeCardProps {
     recipe: Recipe;

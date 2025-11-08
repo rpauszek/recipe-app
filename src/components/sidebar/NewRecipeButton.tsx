@@ -1,4 +1,5 @@
 import { logger } from "../../utils";
+import "../../styles/NewRecipeButton.css"
 
 interface NewRecipeButtonProps {
     isEditingNew: boolean;

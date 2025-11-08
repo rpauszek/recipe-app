@@ -1,6 +1,7 @@
 import RecipeList from "./RecipeList";
 import NewRecipeButton from "./NewRecipeButton";
 import { Recipe, StateSetter } from "../../types";
+import "../../styles/SideBar.css"
 
 interface SideBarProps {
     recipes: Recipe[];

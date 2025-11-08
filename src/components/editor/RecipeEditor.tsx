@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cuisineFlags } from "../../utils";
 import IngredientsListEditor from "./IngredientsListEditor";
+import "../../styles/RecipeEditor.css"
 
 interface RecipeEditorProps {
     onSave: () => void;

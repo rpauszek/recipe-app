@@ -1,0 +1,14 @@
+/* Sidebar (left column) */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 18rem; /* 288px */
+    background: #ffffff;
+    border-right: 1px solid #dddddd;
+}
+
+/* Bottom button area */
+.sidebar-footer {
+    border-top: 1px solid #ddd;
+    padding: 0.75rem;
+}

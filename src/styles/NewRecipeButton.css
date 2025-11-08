@@ -1,0 +1,19 @@
+.new-recipe-btn {
+    width: 100%;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-weight: 600;
+    /* cursor: pointer; */
+    transition: background 0.15s ease;
+}
+
+.new-recipe-btn.disabled {
+    background: #f0f0f0;
+}
+
+.new-recipe-btn:hover:not(.disabled) {
+    background: #047857;
+}

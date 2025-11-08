@@ -1,6 +1,7 @@
 import { Recipe } from "../../types";
 import { logger } from "../../utils";
 import RecipeCard from "./RecipeCard";
+import "../../styles/RecipeList.css"
 
 interface RecipeListProps {
     recipes: Recipe[];

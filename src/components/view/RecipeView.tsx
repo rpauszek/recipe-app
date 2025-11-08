@@ -1,6 +1,7 @@
 import { Recipe } from "../../types";
 import { cuisineFlags } from "../../utils";
 import IngredientsView from "./IngredientsView";
+import "../../styles/RecipeView.css"
 
 interface RecipeViewProps {
     recipe: Recipe | null;
