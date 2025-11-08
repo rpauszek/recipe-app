@@ -2,7 +2,7 @@ import { Ingredient } from "../types";
 
 interface IngredientEditorCallbacks {
     handleChange: (index: number, field: keyof Ingredient, value: string) => void;
-    addIngredient: () => void;
+    addIngredient: (index: number) => void;
 }
 
 interface IngredientEditorProps {
@@ -25,7 +25,7 @@ function IngredientEditor({ index, ingredient, callbacks }: IngredientEditorProp
                 style={{ flexGrow: 1, marginRight: 4 }}
                 onChange={(evt) => callbacks.handleChange(index, "item", evt.target.value)}
             />
-            <button onClick={() => callbacks.addIngredient()}>➕</button>
+            <button onClick={() => callbacks.addIngredient(index)}>➕</button>
             <button>❌</button>
         </div>
     );
