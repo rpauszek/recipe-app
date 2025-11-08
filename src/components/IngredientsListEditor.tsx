@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Ingredient } from "../types";
 import IngredientEditor from "./IngredientEditor";
 import { logger } from "../utils";
@@ -9,6 +9,11 @@ function makeBlankIngredient(): Ingredient {
 
 function IngredientsListEditor() {
     const [ingredients, setIngredients] = useState<Ingredient[]>([makeBlankIngredient()]);
+    const lastInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        lastInputRef.current?.focus();
+    }, [ingredients.length]);
 
     const handleChange = (index: number, field: keyof Ingredient, value: string) => {
         const updater = (prev: Ingredient[]) => {
@@ -44,6 +49,7 @@ function IngredientsListEditor() {
         index: number
     ) => {
         if (evt.key === "Tab" && !evt.shiftKey && index === ingredients.length - 1) {
+            evt.preventDefault();
             addIngredient();
         }
     };
@@ -64,6 +70,7 @@ function IngredientsListEditor() {
                     index={index}
                     ingredient={ingredient}
                     callbacks={callbacks}
+                    inputRef={index === ingredients.length - 1 ? lastInputRef : undefined}
                 />
             ))}
         </div>
