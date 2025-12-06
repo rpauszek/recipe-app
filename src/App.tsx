@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "./types";
-import NewRecipeButton from "./components/NewRecipeButton";
-import RecipeList from "./components/RecipeList";
-import RecipeView from "./components/RecipeView";
-import RecipeEditor from "./components/RecipeEditor";
+import NewRecipeButton from "./components/sidebar/NewRecipeButton";
+import RecipeList from "./components/sidebar/RecipeList";
+import RecipeView from "./components/view/RecipeView";
+import RecipeEditor from "./components/editor/RecipeEditor";
 import "./App.css";
 import { logger } from "./utils";
 

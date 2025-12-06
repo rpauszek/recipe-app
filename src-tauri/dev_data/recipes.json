@@ -31,13 +31,13 @@
                     { "item": "coconut milk", "quantity": "250", "unit": "mL" }
                 ],
                 "main": [
-                    {"item": "rice", "quantity": "1", "unit": "c"}
+                    { "item": "rice", "quantity": "1", "unit": "c" },
+                    { "item": "chicken", "quantity": "300", "unit": "g" },
+                    { "item": "salt, to taste", "quantity": "", "unit": "" }
                 ]
             },
             "steps": {
-                "curry": [
-                    "make the curry"
-                ],
+                "curry": ["make the curry"],
                 "main": [
                     "Cook spaghetti according to package instructions.",
                     "Brown the beef in a pan.",
@@ -52,15 +52,10 @@
             "description": "for when hungover",
             "cuisine": "mexican",
             "ingredients": {
-                "main": [
-                    {"item": "pork", "quantity": "1", "unit": "kg"}
-                ]
+                "main": [{ "item": "pork", "quantity": "1", "unit": "kg" }]
             },
             "steps": {
-                "main": [
-                    "make the pozole.",
-                    "eat the pozole."
-                ]
+                "main": ["make the pozole.", "eat the pozole."]
             }
         }
     ]

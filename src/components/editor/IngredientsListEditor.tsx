@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Ingredient, InputKeyBoardEvt } from "../types";
+import { Ingredient, InputKeyBoardEvt } from "../../types";
 import IngredientEditor from "./IngredientEditor";
 
 function makeBlankIngredient(): Ingredient {
