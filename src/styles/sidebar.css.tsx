@@ -1,9 +1,10 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { vars } from 'styles/tokens.css';
 
 export const button = recipe({
   base: {
     width: '100%',
-    background: '#059669',
+    background: vars.color.primary,
     color: 'white',
     border: 'none',
     borderRadius: 6,
@@ -15,13 +16,13 @@ export const button = recipe({
   variants: {
     disabled: {
       true: {
-        background: '#f0f0f0',
+        background: vars.color.primaryDisabled,
         cursor: 'default', // maybe disable pointer for disabled
       },
       false: {
         selectors: {
           '&:hover': {
-            background: '#047857',
+            background: vars.color.primaryHighlight,
           },
         },
         cursor: 'pointer',
