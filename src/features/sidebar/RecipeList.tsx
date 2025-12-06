@@ -1,6 +1,7 @@
 import { Recipe } from "utils/types";
 import { logger } from "utils/logger";
 import RecipeCard from "./RecipeCard";
+import * as styles from "styles/sidebar.css"
 
 interface RecipeListProps {
     recipes: Recipe[];
@@ -10,10 +11,8 @@ interface RecipeListProps {
 }
 
 function RecipeList({ recipes, selectedRecipe, setSelectedRecipe, isEditingNew }: RecipeListProps) {
-    const className = "recipe-list" + ` ${isEditingNew ? "disabled" : ""}`;
-
     return (
-        <div className={className}>
+        <div className={styles.recipeList({disabled: isEditingNew})}>
             {recipes.map((recipe) => (
                 <RecipeCard
                     key={recipe.id}
@@ -22,7 +21,7 @@ function RecipeList({ recipes, selectedRecipe, setSelectedRecipe, isEditingNew }
                         logger.info(`clicked ${recipe.title}`);
                         setSelectedRecipe(recipe);
                     }}
-                    selected={selectedRecipe?.id === recipe.id}
+                    isSelected={selectedRecipe?.id === recipe.id}
                     isEditingNew={isEditingNew}
                 />
             ))}
