@@ -1,5 +1,5 @@
-import { Recipe } from "../../types";
-import { logger } from "../../utils";
+import { Recipe } from "../../utils/types";
+import { logger } from "../../utils/logger";
 import RecipeCard from "./RecipeCard";
 
 interface RecipeListProps {

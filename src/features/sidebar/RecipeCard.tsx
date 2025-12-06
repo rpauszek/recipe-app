@@ -1,5 +1,5 @@
-import { Recipe } from "../../types";
-import { cuisineFlags } from "../../utils";
+import { Recipe } from "../../utils/types";
+import { cuisineFlags } from "../../utils/cuisines";
 
 interface RecipeCardProps {
     recipe: Recipe;
