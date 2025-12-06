@@ -11,7 +11,11 @@ fn get_recipes() -> String {
 
 fn main() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_log::Builder::new().build())
+        .plugin(
+            tauri_plugin_log::Builder::new()
+                .level(log::LevelFilter::Info)
+                .build(),
+        )
         .setup(|_app| {
             // This runs before the window opens
             // todo: remove debug logging
