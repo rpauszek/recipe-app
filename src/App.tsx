@@ -23,6 +23,7 @@ function App() {
         logger.info("canceling");
     };
 
+    // load recipes on app start
     useEffect(() => {
         async function fetchRecipes() {
             const result = await invoke<string>("get_recipes");
