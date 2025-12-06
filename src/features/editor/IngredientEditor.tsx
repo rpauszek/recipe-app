@@ -1,4 +1,4 @@
-import { Ingredient, InputChangeEvt, InputKeyBoardEvt } from "../../utils/types";
+import { Ingredient, InputChangeEvt, InputKeyBoardEvt } from "utils/types";
 
 interface IngredientEditorCallbacks {
     handleInputChange: (index: number, field: keyof Ingredient, value: string) => void;

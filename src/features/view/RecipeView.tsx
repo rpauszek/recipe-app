@@ -1,5 +1,5 @@
-import { Recipe } from "../../utils/types";
-import { cuisineFlags } from "../../utils/cuisines";
+import { Recipe } from "utils/types";
+import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
 
 interface RecipeViewProps {

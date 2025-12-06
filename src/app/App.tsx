@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { Recipe, RecipeCollection } from "../utils/types";
-import NewRecipeButton from "../features/sidebar/NewRecipeButton";
-import RecipeList from "../features/sidebar/RecipeList";
-import RecipeView from "../features/view/RecipeView";
-import RecipeEditor from "../features/editor/RecipeEditor";
+import { Recipe, RecipeCollection } from "utils/types";
+import NewRecipeButton from "features/sidebar/NewRecipeButton";
+import RecipeList from "features/sidebar/RecipeList";
+import RecipeView from "features/view/RecipeView";
+import RecipeEditor from "features/editor/RecipeEditor";
 import "./App.css";
-import { logger } from "../utils/logger";
+import { logger } from "utils/logger";
 
 function App() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
