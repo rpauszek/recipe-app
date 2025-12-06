@@ -1,3 +1,4 @@
+import * as styles from "./sidebar.css";
 import { logger } from "utils/logger";
 
 interface NewRecipeButtonProps {
@@ -6,11 +7,9 @@ interface NewRecipeButtonProps {
 }
 
 function NewRecipeButton({ isEditingNew, setIsEditingNew }: NewRecipeButtonProps) {
-    const className = "new-recipe-btn" + ` ${isEditingNew ? "disabled" : ""}`;
-
     return (
         <button
-            className={className}
+            className={styles.button({ disabled: isEditingNew })}
             onClick={() => {
                 setIsEditingNew(true);
                 logger.info("clicked");
