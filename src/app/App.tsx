@@ -6,6 +6,8 @@ import RecipeList from "features/sidebar/RecipeList";
 import RecipeView from "features/view/RecipeView";
 import RecipeEditor from "features/editor/RecipeEditor";
 import "./App.css";
+import "styles/global.css"
+import * as styles from "styles/app.css";
 import { logger } from "utils/logger";
 
 function App() {
@@ -34,9 +36,9 @@ function App() {
     }, []);
 
     return (
-        <div className="app">
+        <div className={styles.app}>
             {/* Left sidebar */}
-            <aside className="sidebar">
+            <aside className={styles.sidebar}>
                 <RecipeList
                     recipes={recipes}
                     selectedRecipe={selectedRecipe}
@@ -45,7 +47,7 @@ function App() {
                 />
 
                 {/* Fixed bottom button */}
-                <div className="sidebar-footer">
+                <div className={styles.sidebarFooter}>
                     <NewRecipeButton
                         isEditingNew={isEditingNew}
                         setIsEditingNew={setIsEditingNew}
@@ -54,7 +56,7 @@ function App() {
             </aside>
 
             {/* Main content */}
-            <main className="content">
+            <main className={styles.content}>
                 {isEditingNew ? (
                     <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />
                 ) : (
