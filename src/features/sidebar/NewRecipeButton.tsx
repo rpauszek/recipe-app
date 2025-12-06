@@ -1,4 +1,4 @@
-import * as styles from "./sidebar.css";
+import * as styles from "styles/sidebar.css";
 import { logger } from "utils/logger";
 
 interface NewRecipeButtonProps {

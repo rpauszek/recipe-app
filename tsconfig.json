@@ -23,7 +23,9 @@
     /* path aliases */
     "baseUrl": ".",
     "paths": {
+      "app/*": ["src/app/*"],
       "features/*": ["src/features/*"],
+      "styles/*": ["src/styles/*"],
       "utils/*": ["src/utils/*"]
     }
   },

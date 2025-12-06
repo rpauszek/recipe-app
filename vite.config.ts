@@ -15,6 +15,7 @@ export default defineConfig(async () => ({
     alias: {
       app: path.resolve(__dirname, "src/app"),
       features: path.resolve(__dirname, "src/features"),
+      styles: path.resolve(__dirname, "src/styles"),
       utils: path.resolve(__dirname, "src/utils"),
     },
   },
