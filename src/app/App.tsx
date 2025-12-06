@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { Recipe, RecipeCollection } from "./types";
-import NewRecipeButton from "./components/sidebar/NewRecipeButton";
-import RecipeList from "./components/sidebar/RecipeList";
-import RecipeView from "./components/view/RecipeView";
-import RecipeEditor from "./components/editor/RecipeEditor";
+import { Recipe, RecipeCollection } from "utils/types";
+import NewRecipeButton from "features/sidebar/NewRecipeButton";
+import RecipeList from "features/sidebar/RecipeList";
+import RecipeView from "features/view/RecipeView";
+import RecipeEditor from "features/editor/RecipeEditor";
 import "./App.css";
-import { logger } from "./utils";
+import { logger } from "utils/logger";
 
 function App() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -23,6 +23,7 @@ function App() {
         logger.info("canceling");
     };
 
+    // load recipes on app start
     useEffect(() => {
         async function fetchRecipes() {
             const result = await invoke<string>("get_recipes");
