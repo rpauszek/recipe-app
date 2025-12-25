@@ -1,6 +1,7 @@
 import { Recipe } from "utils/types";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
+import * as styles from "styles/view.css"
 
 interface RecipeViewProps {
     recipe: Recipe | null;
@@ -9,14 +10,14 @@ interface RecipeViewProps {
 function RecipeView({ recipe }: RecipeViewProps) {
     if (!recipe) {
         return (
-            <div className="content-inner">
+            <div className={styles.contentInner}>
                 <h1>nope</h1>
             </div>
         );
     }
 
     return (
-        <div className="content-inner">
+        <div className={styles.contentInner}>
             <h1>{recipe.title}</h1>
 
             <div>{recipe.description}</div>
