@@ -31,11 +31,11 @@ export const newRecipeButton = recipe({
   variants: {
     disabled: {
       true: {
-        background: vars.color.primaryDisabled,
+        background: vars.color.accentDisabled,
         cursor: "default", // maybe disable pointer for disabled
         selectors: {
           "&:hover": {
-            background: vars.color.primaryDisabled,
+            background: vars.color.accentDisabled,
           },
         },
       },
