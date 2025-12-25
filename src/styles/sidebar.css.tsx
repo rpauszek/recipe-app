@@ -20,14 +20,13 @@ export const recipeList = recipe({
   },
 });
 
-
 export const newRecipeButton = recipe({
   base: [
     button,
     {
       width: "100%",
       padding: "0.75rem",
-    }
+    },
   ],
   variants: {
     disabled: {
@@ -39,11 +38,10 @@ export const newRecipeButton = recipe({
             background: vars.color.primaryDisabled,
           },
         },
-      }
+      },
     },
   },
 });
-
 
 export const recipeCard = recipe({
   base: {

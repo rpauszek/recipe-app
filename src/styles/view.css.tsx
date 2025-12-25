@@ -1,33 +1,28 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "styles/tokens.css";
 
-
 export const contentInner = style({
-    maxWidth: "720px",
-    margin: "0 auto",
+  maxWidth: "720px",
+  margin: "0 auto",
 });
-
 
 export const ingredientsList = style({
-    display: "grid",
-    gridTemplateColumns: "auto 1fr",  // qty | unit | name
-    gap: "4px 8px",
-    alignItems: "baseline",
+  display: "grid",
+  gridTemplateColumns: "auto 1fr", // qty | unit | name
+  gap: "4px 8px",
+  alignItems: "baseline",
 });
-
 
 export const ingredientRow = style({
-    display: "contents", // flatten into parent grid
+  display: "contents", // flatten into parent grid
 });
-
 
 export const quantity = style({
-    textAlign: "right",
-    fontWeight: "bold",
-    color: vars.color.text,
+  textAlign: "right",
+  fontWeight: "bold",
+  color: vars.color.text,
 });
 
-
 export const item = style({
-    textAlign: "left",
+  textAlign: "left",
 });
