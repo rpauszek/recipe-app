@@ -12,7 +12,7 @@ export const sidebar = style({
   flexDirection: "column",
   width: "288px",
   background: vars.color.sidebarBackground,
-  boxShadow: "3px 0 8px rgba(0, 0, 0, 0.2)",
+  boxShadow: `3px 0 8px ${vars.color.sidebarShadow}`,
   zIndex: 1,
 });
 
@@ -24,6 +24,5 @@ export const sidebarFooter = style({
 export const content = style({
   flex: 1,
   overflowY: "auto",
-  padding: "2rem",
-  background: vars.color.contentBackground,
+  marginInline: "20px",
 });

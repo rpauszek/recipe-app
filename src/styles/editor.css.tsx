@@ -2,7 +2,6 @@ import { style } from "@vanilla-extract/css";
 import { input } from "./base.css";
 
 export const recipeEditor = style({
-  padding: "1rem",
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
@@ -23,8 +22,6 @@ export const comboRow = style({
 
 export const selectBase = style({
   flex: 1,
-  padding: "0.5rem",
-  fontSize: "1rem",
 });
 
 export const fixedWidth = style([

@@ -1,11 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "styles/tokens.css";
 
-export const contentInner = style({
-  maxWidth: "720px",
-  margin: "0 auto",
-});
-
 export const ingredientsList = style({
   display: "grid",
   gridTemplateColumns: "auto 1fr", // qty | unit | name

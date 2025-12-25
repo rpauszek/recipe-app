@@ -10,14 +10,14 @@ interface RecipeViewProps {
 function RecipeView({ recipe }: RecipeViewProps) {
   if (!recipe) {
     return (
-      <div className={styles.contentInner}>
+      <div>
         <h1>nope</h1>
       </div>
     );
   }
 
   return (
-    <div className={styles.contentInner}>
+    <div>
       <h1>{recipe.title}</h1>
 
       <div>{recipe.description}</div>

@@ -5,6 +5,7 @@ export const vars = createThemeContract({
   color: {
     sidebarBackground: null,
     contentBackground: null,
+    sidebarShadow: null,
 
     text: null,
     // textDimmed: null,
@@ -26,6 +27,7 @@ export const vars = createThemeContract({
 export const lightTheme = createGlobalTheme(":root", vars, {
   color: {
     sidebarBackground: "#F7F5F2",
+    sidebarShadow: "rgba(0, 0, 0, 0.2)",
     contentBackground: "#FCFBF9",
 
     text: "#4A423C",
