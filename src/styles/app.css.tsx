@@ -11,7 +11,7 @@ export const sidebar = style({
   display: "flex",
   flexDirection: "column",
   width: "288px",
-  background: vars.color.backgroundSidebar,
+  background: vars.color.sidebarBackground,
   boxShadow: "3px 0 8px rgba(0, 0, 0, 0.2)",
   zIndex: 1,
 });
@@ -25,5 +25,5 @@ export const content = style({
   flex: 1,
   overflowY: "auto",
   padding: "2rem",
-  background: vars.color.backgroundContent,
+  background: vars.color.contentBackground,
 });

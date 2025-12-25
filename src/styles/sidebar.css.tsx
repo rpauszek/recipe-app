@@ -45,16 +45,16 @@ export const newRecipeButton = recipe({
 
 export const recipeCard = recipe({
   base: {
-    border: "1px solid #ccc",
+    border: `1px solid ${vars.color.cardBorder}`,
     borderRadius: 6,
     padding: 10,
     marginBottom: 8,
     cursor: "pointer",
-    backgroundColor: "white",
+    backgroundColor: vars.color.cardBackground,
     transition: "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
     selectors: {
       "&:hover:not(.disabled)": {
-        backgroundColor: "#f0f0f0",
+        backgroundColor: vars.color.cardBackgroundHovered,
         transform: "translateX(2px)",
       },
     },
@@ -62,12 +62,16 @@ export const recipeCard = recipe({
   variants: {
     selected: {
       true: {
-        backgroundColor: "#e0f7fa",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+        backgroundColor: vars.color.cardBackgroundSelected,
+        boxShadow: `0 4px 12px ${vars.color.cardShadow}`,
         transform: "scale(1.02)",
-        borderColor: "#00acc1",
+        borderColor: vars.color.cardBorderSelected,
         selectors: {
           "&:not(.disabled)": {}, // This variant itself represents selected + not disabled, so hover won't apply here.
+          "&:hover:not(.disabled)": {
+            backgroundColor: vars.color.cardBackgroundHovered,
+            transform: "translateX(2px)",
+          }
         },
       },
       false: {},
@@ -84,13 +88,10 @@ export const recipeCard = recipe({
     {
       variants: { selected: true, disabled: true },
       style: {
-        // if selected and disabled, maybe keep opacity and no transform
-        backgroundColor: "#e0f7fa",
         opacity: 0.6,
         cursor: "default",
         boxShadow: "none",
         transform: "none",
-        borderColor: "#00acc1",
       },
     },
   ],

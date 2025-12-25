@@ -3,11 +3,19 @@ import { createGlobalTheme, createThemeContract } from "@vanilla-extract/css";
 // Define the contract (CSS variables keys)
 export const vars = createThemeContract({
   color: {
-    backgroundSidebar: null,
-    backgroundContent: null,
-    backgroundSecondary: null,
+    sidebarBackground: null,
+    contentBackground: null,
+
     text: null,
-    textDimmed: null,
+    // textDimmed: null,
+
+    cardBackground: null,
+    cardBackgroundHovered: null,
+    cardBackgroundSelected: null,
+    cardShadow: null,
+    cardBorder: null,
+    cardBorderSelected: null,
+
     primary: null,
     primaryDimmed: null,
     primaryHighlight: null,
@@ -22,11 +30,19 @@ export const vars = createThemeContract({
 // Create a global theme, which sets the CSS variables on :root
 export const lightTheme = createGlobalTheme(":root", vars, {
   color: {
-    backgroundSidebar: "#F7F5F2",
-    backgroundContent: "#FCFBF9",
-    backgroundSecondary: "#D9E2EC",
-    text: "#334E68",
-    textDimmed: "#829AB1",
+    sidebarBackground: "#F7F5F2",
+    contentBackground: "#FCFBF9",
+
+    text: "#4A423C",
+    // textDimmed: "#7B6F69",
+
+    cardBackground: "#FFFFFF",
+    cardBackgroundHovered: "#F2E6DA",
+    cardBackgroundSelected: "#E6D8CE",
+    cardShadow: "rgba(183,95,60, 0.25)",
+    cardBorder: "#D8D2CA",
+    cardBorderSelected: "#B75F3C",
+
     primary: "#486581",
     primaryDimmed: "#829AB1",
     primaryHighlight: "#2F4C73",
