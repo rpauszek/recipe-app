@@ -16,3 +16,12 @@ export const button = style({
         },
     },
 });
+
+
+export const input = style({
+    borderRadius: "5px",
+    borderColor: vars.color.primaryDimmed,
+    borderWidth: "1px",
+    borderStyle: "solid",
+    padding: "0.2rem",
+});

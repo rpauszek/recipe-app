@@ -1,6 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "./tokens.css";
-
+import { input } from "./base.css";
 
 export const recipeEditor = style({
     padding: "1rem",
@@ -10,14 +9,10 @@ export const recipeEditor = style({
 });
 
 
-export const recipeTitleInput = style({
+export const recipeTitleInput = style([ input, {
     fontSize: "1.2rem",
     padding: "0.5rem",
-    borderRadius: "5px",
-    borderColor: vars.color.primaryDimmed,
-    borderWidth: "1px",
-    borderStyle: "solid",
-});
+} ]);
 
 
 export const comboRow = style({
@@ -33,11 +28,11 @@ export const selectBase = style({
 });
 
 
-export const fixedWidth = style({
+export const fixedWidth = style([ input, {
     width: 60,
-});
+} ]);
 
 
-export const growWidth = style({
+export const growWidth = style([ input, {
     flexGrow: 1,
-})
+} ]);
