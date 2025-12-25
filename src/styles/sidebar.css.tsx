@@ -1,5 +1,6 @@
 import { recipe } from "@vanilla-extract/recipes";
 import { vars } from "styles/tokens.css";
+import { button } from "./base.css";
 
 export const recipeList = recipe({
   base: {
@@ -19,35 +20,30 @@ export const recipeList = recipe({
   },
 });
 
-export const button = recipe({
-  base: {
-    width: "100%",
-    background: vars.color.primary,
-    color: "white",
-    border: "none",
-    borderRadius: 6,
-    padding: "0.75rem",
-    fontWeight: 600,
-    transition: "background 0.15s ease",
-    // cursor: 'pointer', // uncomment if you want pointer cursor by default
-  },
+
+export const newRecipeButton = recipe({
+  base: [
+    button,
+    {
+      width: "100%",
+      padding: "0.75rem",
+    }
+  ],
   variants: {
     disabled: {
       true: {
         background: vars.color.primaryDisabled,
         cursor: "default", // maybe disable pointer for disabled
-      },
-      false: {
         selectors: {
           "&:hover": {
-            background: vars.color.primaryHighlight,
+            background: vars.color.primaryDisabled,
           },
         },
-        cursor: "pointer",
-      },
+      }
     },
   },
 });
+
 
 export const recipeCard = recipe({
   base: {

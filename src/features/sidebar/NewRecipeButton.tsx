@@ -9,7 +9,7 @@ interface NewRecipeButtonProps {
 function NewRecipeButton({ isEditingNew, setIsEditingNew }: NewRecipeButtonProps) {
     return (
         <button
-            className={styles.button({ disabled: isEditingNew })}
+            className={styles.newRecipeButton({ disabled: isEditingNew })}
             onClick={() => {
                 setIsEditingNew(true);
                 logger.info("clicked");

@@ -1,5 +1,6 @@
 import { Ingredient, InputChangeEvt, InputKeyBoardEvt } from "utils/types";
 import * as styles from "styles/editor.css";
+import { button } from "styles/base.css";
 
 interface IngredientEditorCallbacks {
     handleInputChange: (index: number, field: keyof Ingredient, value: string) => void;
@@ -45,8 +46,8 @@ function IngredientEditor({ index, ingredient, callbacks, inputRef }: Ingredient
                 onChange={(evt) => handleChange("item", evt)}
                 onKeyDown={(evt) => callbacks.handleTabOnLastIngredient(evt, index)}
             />
-            <button onClick={() => callbacks.addIngredient(index)}>➕</button>
-            <button onClick={() => callbacks.removeIngredient(index)}>❌</button>
+            <button className={button} onClick={() => callbacks.addIngredient(index)}>➕</button>
+            <button className={button} onClick={() => callbacks.removeIngredient(index)}>❌</button>
         </div>
     );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsListEditor from "./IngredientsListEditor";
 import * as styles from "styles/editor.css"
+import { button } from "styles/base.css";
 
 interface RecipeEditorProps {
     onSave: () => void;
@@ -63,8 +64,8 @@ function RecipeEditor({ onSave, onCancel }: RecipeEditorProps) {
             <IngredientsListEditor />
 
             <div className={styles.comboRow}>
-                <button onClick={onSave}>Save</button>
-                <button onClick={onCancel}>Cancel</button>
+                <button className={button} onClick={onSave}>Save</button>
+                <button className={button} onClick={onCancel}>Cancel</button>
             </div>
         </div>
     );
