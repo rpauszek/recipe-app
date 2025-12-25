@@ -5,7 +5,6 @@ import NewRecipeButton from "features/sidebar/NewRecipeButton";
 import RecipeList from "features/sidebar/RecipeList";
 import RecipeView from "features/view/RecipeView";
 import RecipeEditor from "features/editor/RecipeEditor";
-import "./App.css";
 import "styles/global.css"
 import * as styles from "styles/app.css";
 import { logger } from "utils/logger";
