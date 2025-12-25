@@ -3,7 +3,8 @@ import { createGlobalTheme, createThemeContract } from "@vanilla-extract/css";
 // Define the contract (CSS variables keys)
 export const vars = createThemeContract({
   color: {
-    background: null,
+    backgroundSidebar: null,
+    backgroundContent: null,
     backgroundSecondary: null,
     text: null,
     textDimmed: null,
@@ -21,7 +22,8 @@ export const vars = createThemeContract({
 // Create a global theme, which sets the CSS variables on :root
 export const lightTheme = createGlobalTheme(":root", vars, {
   color: {
-    background: "#F0F4F8",
+    backgroundSidebar: "#F7F5F2",
+    backgroundContent: "#FCFBF9",
     backgroundSecondary: "#D9E2EC",
     text: "#334E68",
     textDimmed: "#829AB1",
