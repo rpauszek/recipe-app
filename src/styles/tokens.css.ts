@@ -1,4 +1,5 @@
 import { createGlobalTheme, createThemeContract } from "@vanilla-extract/css";
+import * as colors from "./colors";
 
 // Define the contract (CSS variables keys)
 export const vars = createThemeContract({
@@ -16,6 +17,7 @@ export const vars = createThemeContract({
     cardShadow: null,
     cardBorder: null,
     cardBorderSelected: null,
+    cardBorderHovered: null,
 
     accent: null,
     accentHighlight: null,
@@ -24,24 +26,27 @@ export const vars = createThemeContract({
 });
 
 // Create a global theme, which sets the CSS variables on :root
+const accent = colors.terracotta;
+const palette = colors.parchment;
 export const lightTheme = createGlobalTheme(":root", vars, {
   color: {
-    sidebarBackground: "#F7F5F2",
-    sidebarShadow: "rgba(0, 0, 0, 0.2)",
-    contentBackground: "#FCFBF9",
+    sidebarBackground: palette.sidebar,
+    sidebarShadow: palette.shadow,
+    contentBackground: palette.content,
 
-    text: "#4A423C",
+    text: palette.text,
     // textDimmed: "#7B6F69",
 
-    cardBackground: "#FFFFFF",
-    cardBackgroundHovered: "#F2E6DA",
-    cardBackgroundSelected: "#E6D8CE",
-    cardShadow: "rgba(183,95,60, 0.25)",
-    cardBorder: "#D8D2CA",
-    cardBorderSelected: "#B75F3C",
+    cardBackground: "white",
+    cardBackgroundHovered: "white",
+    cardBackgroundSelected: accent.light,
+    cardShadow: colors.hexToRgba(accent.veryDark, 0.25),
+    cardBorder: accent.disabled,
+    cardBorderSelected: accent.color,
+    cardBorderHovered: accent.color,
 
-    accent: "#D95C3F",
-    accentHighlight: "#C14E34",
-    accentDisabled: "#E3B7AA",
+    accent: accent.color,
+    accentHighlight: accent.highlighted,
+    accentDisabled: accent.disabled,
   },
 });

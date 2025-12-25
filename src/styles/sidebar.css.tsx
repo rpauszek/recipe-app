@@ -55,6 +55,7 @@ export const recipeCard = recipe({
     selectors: {
       "&:hover:not(.disabled)": {
         backgroundColor: vars.color.cardBackgroundHovered,
+        borderColor: vars.color.cardBorderHovered,
         transform: "translateX(2px)",
       },
     },
