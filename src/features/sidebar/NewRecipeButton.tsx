@@ -3,8 +3,7 @@ import { logger } from "utils/logger";
 import { useApp } from "app/AppContext";
 
 function NewRecipeButton() {
-  const { mode, setMode } = useApp();
-  const isEditing = mode === "edit";
+  const { isEditing, setMode } = useApp();
 
   return (
     <button

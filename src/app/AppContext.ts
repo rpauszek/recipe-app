@@ -4,6 +4,7 @@ import { AppMode, Recipe } from "utils/types";
 export interface AppState {
   mode: AppMode;
   setMode: Dispatch<SetStateAction<AppMode>>;
+  isEditing: boolean;
   selectedRecipe: Recipe | null;
   setSelectedRecipe: Dispatch<SetStateAction<Recipe | null>>;
 }

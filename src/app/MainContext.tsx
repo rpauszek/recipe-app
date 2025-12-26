@@ -6,7 +6,7 @@ import * as styles from "styles/app.css";
 import { logger } from "utils/logger";
 
 export function MainContext() {
-  const { mode, setMode, selectedRecipe } = useApp();
+  const { isEditing, setMode, selectedRecipe } = useApp();
 
   const onSaveRecipe = () => {
     setMode("view");
@@ -20,7 +20,7 @@ export function MainContext() {
 
   return (
     <main className={styles.content}>
-      {mode === "edit" ? (
+      {isEditing ? (
         <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />
       ) : (
         <RecipeView recipe={selectedRecipe} />

@@ -11,8 +11,7 @@ interface RecipeCardProps {
 }
 
 function RecipeCard({ recipe, onClick, isSelected }: RecipeCardProps) {
-  const { mode } = useApp();
-  const isEditing = mode === "edit";
+  const { isEditing } = useApp();
 
   return (
     <div

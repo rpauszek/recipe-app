@@ -10,8 +10,7 @@ interface RecipeListProps {
 }
 
 function RecipeList({ recipes }: RecipeListProps) {
-  const { mode, selectedRecipe, setSelectedRecipe } = useApp();
-  const isEditing = mode === "edit";
+  const { isEditing, selectedRecipe, setSelectedRecipe } = useApp();
 
   return (
     <div className={styles.recipeList({ disabled: isEditing })}>
