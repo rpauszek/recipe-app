@@ -3,15 +3,14 @@ import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "utils/types";
 
 import { MainContext } from "./MainContext";
+import { Sidebar } from "./Sidebar";
+import { AppProvider } from "./AppProvider";
 
 import "styles/global.css";
 import * as styles from "styles/app.css";
-import { Sidebar } from "./Sidebar";
 
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [isEditingNew, setIsEditingNew] = useState(false);
 
   // load recipes on app start
   useEffect(() => {
@@ -24,21 +23,15 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.app}>
-      <Sidebar
-        recipes={recipes}
-        selectedRecipe={selectedRecipe}
-        setSelectedRecipe={setSelectedRecipe}
-        isEditingNew={isEditingNew}
-        setIsEditingNew={setIsEditingNew}
-      />
+    <AppProvider>
+      <div className={styles.app}>
+        <Sidebar
+          recipes={recipes}
+        />
 
-      <MainContext
-        isEditingNew={isEditingNew}
-        setIsEditingNew={setIsEditingNew}
-        selectedRecipe={selectedRecipe}
-      />
-    </div>
+        <MainContext />
+      </div>
+    </AppProvider>
   );
 }
 
