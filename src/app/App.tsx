@@ -1,28 +1,16 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "utils/types";
-import NewRecipeButton from "features/sidebar/NewRecipeButton";
-import RecipeList from "features/sidebar/RecipeList";
-import RecipeView from "features/view/RecipeView";
-import RecipeEditor from "features/editor/RecipeEditor";
+
+import { MainContext } from "./MainContext";
+import { Sidebar } from "./Sidebar";
+import { AppProvider } from "./AppProvider";
+
 import "styles/global.css";
 import * as styles from "styles/app.css";
-import { logger } from "utils/logger";
 
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [isEditingNew, setIsEditingNew] = useState(false);
-
-  const onSaveRecipe = () => {
-    setIsEditingNew(false);
-    logger.info("saving");
-  };
-
-  const onCancelRecipe = () => {
-    setIsEditingNew(false);
-    logger.info("canceling");
-  };
 
   // load recipes on app start
   useEffect(() => {
@@ -35,31 +23,15 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.app}>
-      {/* Left sidebar */}
-      <aside className={styles.sidebar}>
-        <RecipeList
+    <AppProvider>
+      <div className={styles.app}>
+        <Sidebar
           recipes={recipes}
-          selectedRecipe={selectedRecipe}
-          setSelectedRecipe={setSelectedRecipe}
-          isEditingNew={isEditingNew}
         />
 
-        {/* Fixed bottom button */}
-        <div className={styles.sidebarFooter}>
-          <NewRecipeButton isEditingNew={isEditingNew} setIsEditingNew={setIsEditingNew} />
-        </div>
-      </aside>
-
-      {/* Main content */}
-      <main className={styles.content}>
-        {isEditingNew ? (
-          <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />
-        ) : (
-          <RecipeView recipe={selectedRecipe} />
-        )}
-      </main>
-    </div>
+        <MainContext />
+      </div>
+    </AppProvider>
   );
 }
 

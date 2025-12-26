@@ -1,18 +1,19 @@
 import { Recipe } from "utils/types";
-import { logger } from "utils/logger";
 import RecipeCard from "./RecipeCard";
+import { useApp } from "app/AppContext";
+
 import * as styles from "styles/sidebar.css";
+import { logger } from "utils/logger";
 
 interface RecipeListProps {
   recipes: Recipe[];
-  selectedRecipe: Recipe | null;
-  setSelectedRecipe: (recipe: Recipe) => void;
-  isEditingNew: boolean;
 }
 
-function RecipeList({ recipes, selectedRecipe, setSelectedRecipe, isEditingNew }: RecipeListProps) {
+function RecipeList({ recipes }: RecipeListProps) {
+  const { isEditing, selectedRecipe, setSelectedRecipe } = useApp();
+
   return (
-    <div className={styles.recipeList({ disabled: isEditingNew })}>
+    <div className={styles.recipeList({ disabled: isEditing })}>
       {recipes.map((recipe) => (
         <RecipeCard
           key={recipe.id}
@@ -22,7 +23,6 @@ function RecipeList({ recipes, selectedRecipe, setSelectedRecipe, isEditingNew }
             setSelectedRecipe(recipe);
           }}
           isSelected={selectedRecipe?.id === recipe.id}
-          isEditingNew={isEditingNew}
         />
       ))}
     </div>
