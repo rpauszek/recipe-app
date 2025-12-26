@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import path from "path";
 
 import { fileURLToPath } from "url";
@@ -9,11 +10,12 @@ const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
 export default defineConfig(async () => ({
-  plugins: [react()],
+  plugins: [react(), vanillaExtractPlugin()],
   resolve: {
     alias: {
       app: path.resolve(__dirname, "src/app"),
       features: path.resolve(__dirname, "src/features"),
+      styles: path.resolve(__dirname, "src/styles"),
       utils: path.resolve(__dirname, "src/utils"),
     },
   },
