@@ -24,18 +24,24 @@ export const newRecipeButton = recipe({
   base: [
     button,
     {
+      backgroundColor: vars.accent.color,
       width: "100%",
       padding: "0.75rem",
+      selectors: {
+        "&:hover": {
+          background: vars.accent.highlighted,
+        },
+      },
     },
   ],
   variants: {
     disabled: {
       true: {
-        background: vars.color.accentDisabled,
+        background: vars.accent.disabled,
         cursor: "default", // maybe disable pointer for disabled
         selectors: {
           "&:hover": {
-            background: vars.color.accentDisabled,
+            background: vars.accent.disabled,
           },
         },
       },
@@ -45,17 +51,17 @@ export const newRecipeButton = recipe({
 
 export const recipeCard = recipe({
   base: {
-    border: `1px solid ${vars.color.cardBorder}`,
+    border: `1px solid ${vars.card.border}`,
     borderRadius: 6,
     padding: 10,
     marginBottom: 8,
     cursor: "pointer",
-    backgroundColor: vars.color.cardBackground,
+    backgroundColor: vars.card.background,
     transition: "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
     selectors: {
       "&:hover:not(.disabled)": {
-        backgroundColor: vars.color.cardBackgroundHovered,
-        borderColor: vars.color.cardBorderHovered,
+        backgroundColor: vars.card.backgroundHovered,
+        borderColor: vars.card.borderHovered,
         transform: "translateX(2px)",
       },
     },
@@ -63,16 +69,16 @@ export const recipeCard = recipe({
   variants: {
     selected: {
       true: {
-        backgroundColor: vars.color.cardBackgroundSelected,
-        boxShadow: `0 4px 12px ${vars.color.cardShadow}`,
+        backgroundColor: vars.card.backgroundSelected,
+        boxShadow: `0 4px 12px ${vars.card.shadow}`,
         transform: "scale(1.02)",
-        borderColor: vars.color.cardBorderSelected,
+        borderColor: vars.card.borderSelected,
         selectors: {
           "&:not(.disabled)": {}, // This variant itself represents selected + not disabled, so hover won't apply here.
           "&:hover:not(.disabled)": {
-            backgroundColor: vars.color.cardBackgroundHovered,
+            backgroundColor: vars.card.backgroundHovered,
             transform: "translateX(2px)",
-          }
+          },
         },
       },
       false: {},

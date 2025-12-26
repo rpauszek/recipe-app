@@ -60,7 +60,7 @@ export const rusticCoral: Color = {
 
 export const parchment: UiPalette = {
   sidebar: "#F7F5F2",
-  shadow: "rgba(0, 0, 0, 0.2)",
+  shadow: "#000000",
   content: "#FCFBF9",
   text: "#4A423C",
   textDimmed: "#7B6F69",

@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "styles/tokens.css";
 
 export const ingredientsList = style({
   display: "grid",
@@ -15,7 +14,6 @@ export const ingredientRow = style({
 export const quantity = style({
   textAlign: "right",
   fontWeight: "bold",
-  color: vars.color.text,
 });
 
 export const item = style({

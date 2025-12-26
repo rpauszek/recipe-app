@@ -5,8 +5,8 @@ import { vars } from "./tokens.css";
 globalStyle("html, body", {
   margin: 0,
   padding: 0,
-  background: vars.color.contentBackground,
-  color: vars.color.text,
+  background: vars.ui.background,
+  color: vars.ui.text,
   fontFamily: "system-ui, sans-serif",
 });
 

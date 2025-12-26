@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "./tokens.css";
 
 export const button = style({
-  background: vars.color.accent,
+  background: vars.primary.color,
   color: "white",
   border: "none",
   borderRadius: 6,
@@ -12,14 +12,14 @@ export const button = style({
 
   selectors: {
     "&:hover": {
-      background: vars.color.accentHighlight,
+      background: vars.primary.highlighted,
     },
   },
 });
 
 export const input = style({
   borderRadius: "5px",
-  borderColor: vars.color.cardBorderSelected,
+  borderColor: vars.primary.color,
   borderWidth: "1px",
   borderStyle: "solid",
   padding: "0.2rem",

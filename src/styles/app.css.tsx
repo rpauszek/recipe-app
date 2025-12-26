@@ -11,13 +11,12 @@ export const sidebar = style({
   display: "flex",
   flexDirection: "column",
   width: "288px",
-  background: vars.color.sidebarBackground,
-  boxShadow: `3px 0 8px ${vars.color.sidebarShadow}`,
+  background: vars.sidebar.background,
+  boxShadow: `3px 0 8px ${vars.sidebar.shadow}`,
   zIndex: 1,
 });
 
 export const sidebarFooter = style({
-  borderTop: `1px solid ${vars.color.text}`,
   padding: "0.75rem",
 });
 
