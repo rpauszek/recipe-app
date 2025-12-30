@@ -3,25 +3,22 @@ import RecipeEditor from "features/editor/RecipeEditor";
 import { useApp } from "./AppContext";
 
 import * as styles from "styles/app.css";
-import { logger } from "utils/logger";
+import { EditorProvider } from "features/editor/EditorProvider";
+
+function createEmptyRecipe() {
+  return { id: 42, title: "", description: "", cuisine: "", ingredients: null, steps: null };
+}
 
 export function MainContent() {
-  const { isEditing, setMode, selectedRecipe } = useApp();
-
-  const onSaveRecipe = () => {
-    setMode("view");
-    logger.info("saving");
-  };
-
-  const onCancelRecipe = () => {
-    setMode("view");
-    logger.info("canceling");
-  };
+  const { isEditing, selectedRecipe } = useApp();
+  const initialRecipe = createEmptyRecipe();
 
   return (
     <main className={styles.content}>
       {isEditing ? (
-        <RecipeEditor onSave={onSaveRecipe} onCancel={onCancelRecipe} />
+        <EditorProvider initialRecipe={initialRecipe}>
+          <RecipeEditor />
+        </EditorProvider>
       ) : (
         <RecipeView recipe={selectedRecipe} />
       )}

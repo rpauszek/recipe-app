@@ -9,8 +9,8 @@ export interface Recipe {
   title: string;
   description: string;
   cuisine: string;
-  ingredients: Record<string, Ingredient[]>;
-  steps: Record<string, string[]>;
+  ingredients: Record<string, Ingredient[]> | null;
+  steps: Record<string, string[]> | null;
 }
 
 export interface RecipeCollection {
