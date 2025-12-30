@@ -33,6 +33,7 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
 
     setIsSaving(true);
     logger.info("Saving recipe!");
+    logger.info(Object.entries(draft).join(", "))
 
     setIsSaving(false);
     setIsDirty(false);

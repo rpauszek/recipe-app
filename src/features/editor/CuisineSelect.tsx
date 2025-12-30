@@ -1,22 +1,22 @@
-import { useState } from "react";
 import { cuisineFlags } from "utils/cuisines";
 import * as styles from "styles/editor.css";
+import { useEditor } from "./EditorContext";
 
 export default function CuisineSelect() {
-  const [cuisine, setCuisine] = useState("");
+  const { draft, setField } = useEditor();
 
   const cuisineOptions = Object.entries(cuisineFlags)
     .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
     .map(([key, flag]) => (
       <option key={key} value={key}>
-        {flag} {key[0].toUpperCase() + key.slice(1)}
+        {key[0].toUpperCase() + key.slice(1)} {flag}
       </option>
     ));
 
   return (
     <select
-      value={cuisine}
-      onChange={(e) => setCuisine(e.target.value)}
+      value={draft.cuisine}
+      onChange={(e) => setField("cuisine", e.target.value)}
       className={styles.selectBase}
     >
       <option value="" disabled>

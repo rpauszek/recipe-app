@@ -8,6 +8,7 @@ export interface Recipe {
   id: number;
   title: string;
   description: string;
+  category: string;
   cuisine: string;
   ingredients: Record<string, Ingredient[]> | null;
   steps: Record<string, string[]> | null;

@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEditor } from "./EditorContext";
 import * as styles from "styles/editor.css";
 
 export default function CategorySelect() {
-  const [recipeType, setRecipeType] = useState("");
+  const { draft, setField } = useEditor();
 
   return (
     <select
-      value={recipeType}
-      onChange={(e) => setRecipeType(e.target.value)}
+      value={draft.category}
+      onChange={(e) => setField("category", e.target.value)}
       className={styles.selectBase}
     >
       <option value="" disabled>
