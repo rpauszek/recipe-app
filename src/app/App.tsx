@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Recipe, RecipeCollection } from "utils/types";
 
-import { MainContext } from "./MainContext";
+import { MainContent } from "./MainContent";
 import { Sidebar } from "./Sidebar";
 import { AppProvider } from "./AppProvider";
 
@@ -29,7 +29,7 @@ function App() {
           recipes={recipes}
         />
 
-        <MainContext />
+        <MainContent />
       </div>
     </AppProvider>
   );

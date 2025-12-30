@@ -5,7 +5,7 @@ import { useApp } from "./AppContext";
 import * as styles from "styles/app.css";
 import { logger } from "utils/logger";
 
-export function MainContext() {
+export function MainContent() {
   const { isEditing, setMode, selectedRecipe } = useApp();
 
   const onSaveRecipe = () => {
