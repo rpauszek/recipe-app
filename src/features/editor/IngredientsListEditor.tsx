@@ -1,55 +1,31 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Ingredient, InputKeyBoardEvt } from "utils/types";
 import IngredientEditor from "./IngredientEditor";
-
-function makeBlankIngredient(): Ingredient {
-  return { quantity: "", unit: "", item: "" };
-}
+import { useEditor } from "./EditorContext";
 
 function IngredientsListEditor() {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([makeBlankIngredient()]);
   const lastInputRef = useRef<HTMLInputElement>(null);
+  const { draft, updateIngredient, addIngredient, removeIngredient } = useEditor();
+  const GROUP = "main";
+  const ingredients = draft.ingredients[GROUP] ?? [];
 
   useEffect(() => {
     lastInputRef.current?.focus();
   }, [ingredients.length]);
 
-  const handleInputChange = (index: number, field: keyof Ingredient, value: string) => {
-    const updater = (prev: Ingredient[]) => {
-      const newIngredients = [...prev];
-      newIngredients[index][field] = value;
-      return newIngredients;
-    };
-    setIngredients(updater);
-  };
-
-  const addIngredient = (index?: number) => {
-    let updater: (prev: Ingredient[]) => Ingredient[];
-    if (index !== undefined) {
-      index += 1;
-      updater = (prev) => [...prev.slice(0, index), makeBlankIngredient(), ...prev.slice(index)];
-    } else {
-      updater = (prev) => [...prev, makeBlankIngredient()];
-    }
-    setIngredients(updater);
-  };
-
-  const removeIngredient = (index: number) => {
-    const updater = (prev: Ingredient[]) => prev.filter((_, i) => i !== index);
-    setIngredients(updater);
-  };
-
   const handleTabOnLastIngredient = (evt: InputKeyBoardEvt, index: number) => {
     if (evt.key === "Tab" && !evt.shiftKey && index === ingredients.length - 1) {
       evt.preventDefault();
-      addIngredient();
+      addIngredient(GROUP);
     }
   };
 
   const callbacks = {
-    handleInputChange: handleInputChange,
-    addIngredient: addIngredient,
-    removeIngredient: removeIngredient,
+    handleInputChange: (index: number, field: keyof Ingredient, value: string) => {
+      updateIngredient(GROUP, index, field, value);
+    },
+    addIngredient: (index?: number) => addIngredient(GROUP, index),
+    removeIngredient: (index: number) => removeIngredient(GROUP, index),
     handleTabOnLastIngredient: handleTabOnLastIngredient,
   };
 

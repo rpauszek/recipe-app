@@ -11,10 +11,10 @@ export function createEmptyRecipe(): RecipeDraft {
     category: "",
     cuisine: "",
     ingredients: {
-      Main: [createEmptyIngredient()],
+      main: [createEmptyIngredient()],
     },
     steps: {
-      Main: [""],
+      main: [""],
     },
   };
 }
