@@ -4,18 +4,7 @@ import { useApp } from "./AppContext";
 
 import * as styles from "styles/app.css";
 import { EditorProvider } from "features/editor/EditorProvider";
-
-function createEmptyRecipe() {
-  return {
-    id: 42,
-    title: "",
-    description: "",
-    category: "",
-    cuisine: "",
-    ingredients: null,
-    steps: null,
-  };
-}
+import { createEmptyRecipe } from "features/editor/constructors";
 
 export function MainContent() {
   const { isEditing, selectedRecipe } = useApp();

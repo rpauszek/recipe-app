@@ -10,9 +10,10 @@ export interface Recipe {
   description: string;
   category: string;
   cuisine: string;
-  ingredients: Record<string, Ingredient[]> | null;
-  steps: Record<string, string[]> | null;
+  ingredients: Record<string, Ingredient[]>;
+  steps: Record<string, string[]>;
 }
+export type RecipeDraft = Omit<Recipe, "id">;
 
 export interface RecipeCollection {
   recipes: Recipe[];

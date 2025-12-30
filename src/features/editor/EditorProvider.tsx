@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { EditorContext } from "./EditorContext";
-import { Recipe } from "utils/types";
+import { RecipeDraft } from "utils/types";
 import { useApp } from "app/AppContext";
 import { logger } from "utils/logger";
 
 interface EditorProviderProps {
-  initialRecipe: Recipe;
+  initialRecipe: RecipeDraft;
   children: React.ReactNode;
 }
 
 export function EditorProvider({ initialRecipe, children }: EditorProviderProps) {
-  const [draft, setDraft] = useState<Recipe>(initialRecipe);
+  const [draft, setDraft] = useState<RecipeDraft>(initialRecipe);
   const [isDirty, setIsDirty] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
   const { setMode } = useApp();
 
-  function setField<K extends keyof Recipe>(key: K, value: Recipe[K]) {
+  function setField<K extends keyof RecipeDraft>(key: K, value: RecipeDraft[K]) {
     setDraft((prev) => ({
       ...prev,
       [key]: value,
@@ -33,7 +33,7 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
 
     setIsSaving(true);
     logger.info("Saving recipe!");
-    logger.info(Object.entries(draft).join(", "))
+    logger.info(Object.entries(draft).join(", "));
 
     setIsSaving(false);
     setIsDirty(false);

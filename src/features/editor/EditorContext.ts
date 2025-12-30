@@ -1,11 +1,11 @@
 import { createContext, useContext } from "react";
-import { Recipe } from "utils/types";
+import { RecipeDraft } from "utils/types";
 
 export interface EditorState {
-  draft: Recipe;
+  draft: RecipeDraft;
   isDirty: boolean;
   isSaving: boolean;
-  setField: <K extends keyof Recipe>(key: K, value: Recipe[K]) => void;
+  setField: <K extends keyof RecipeDraft>(key: K, value: RecipeDraft[K]) => void;
   save: () => Promise<void>;
   cancel: () => void;
 }
