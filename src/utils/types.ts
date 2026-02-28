@@ -8,17 +8,20 @@ export interface Recipe {
   id: number;
   title: string;
   description: string;
+  category: string;
   cuisine: string;
   ingredients: Record<string, Ingredient[]>;
   steps: Record<string, string[]>;
 }
+export type RecipeDraft = Omit<Recipe, "id">;
 
 export interface RecipeCollection {
   recipes: Recipe[];
 }
 
-// app context
+// context types
 export type AppMode = "view" | "edit";
+export type EditKind = "new" | "existing";
 
 // alias React events
 export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>;

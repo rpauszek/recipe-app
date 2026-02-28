@@ -1,7 +1,11 @@
 import { Recipe } from "utils/types";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
-import * as styles from "styles/view.css";
+import { useEditor } from "features/editor/EditorContext";
+
+import { button } from "styles/base.css";
+
+import { logger } from "utils/logger";
 
 interface RecipeViewProps {
   recipe: Recipe | null;
@@ -16,9 +20,20 @@ function RecipeView({ recipe }: RecipeViewProps) {
     );
   }
 
+  const { loadDraft } = useEditor();
+
   return (
     <div>
       <h1>{recipe.title}</h1>
+      <button
+        className={button}
+        onClick={() => {
+          logger.info(JSON.stringify(recipe, null, 2));
+          loadDraft(recipe);
+        }}
+      >
+        edit
+      </button>
 
       <div>{recipe.description}</div>
 
