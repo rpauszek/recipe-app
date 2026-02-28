@@ -93,6 +93,12 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
     setIsDirty(true);
   }
 
+  function loadDraft(recipe: RecipeDraft) {
+    setDraft(recipe);
+    setIsDirty(false);
+    setMode("edit");
+  }
+
   async function save() {
     if (!isDirty) {
       logger.info("no dirty, exiting");
@@ -125,6 +131,7 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
     updateIngredient,
     addIngredient,
     removeIngredient,
+    loadDraft,
     save,
     cancel,
   };

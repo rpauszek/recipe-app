@@ -12,13 +12,13 @@ export function MainContent() {
 
   return (
     <main className={styles.content}>
+      <EditorProvider initialRecipe={initialRecipe}>
       {isEditing ? (
-        <EditorProvider initialRecipe={initialRecipe}>
           <RecipeEditor />
-        </EditorProvider>
       ) : (
         <RecipeView recipe={selectedRecipe} />
       )}
+      </EditorProvider>
     </main>
   );
 }
