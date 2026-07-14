@@ -5,7 +5,7 @@ export interface Ingredient {
 }
 
 export interface Recipe {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -13,7 +13,7 @@ export interface Recipe {
   ingredients: Record<string, Ingredient[]>;
   steps: Record<string, string[]>;
 }
-export type RecipeDraft = Omit<Recipe, "id">; // ! should include id; ie, is Recipe
+export type RecipeDraft = Recipe;
 
 export interface RecipeCollection {
   recipes: Recipe[];

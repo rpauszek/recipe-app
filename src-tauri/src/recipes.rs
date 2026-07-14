@@ -5,12 +5,12 @@ use std::path::PathBuf;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RecipeCollection {
-    pub recipes: Vec<Recipe>,
+    pub recipes: Vec<RecipeDto>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Recipe {
-    pub id: u32,
+pub struct RecipeDto { // DTO === Data Transfer Object
+    pub id: String,
     pub title: String,
     pub description: String,
     pub cuisine: String,

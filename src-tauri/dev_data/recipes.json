@@ -1,7 +1,7 @@
 {
     "recipes": [
         {
-            "id": 0,
+            "id": "217f6405-c306-4865-8bda-1ccbaae899e1",
             "title": "Spaghetti Bolognese",
             "description": "Classic Italian pasta with meat sauce",
             "cuisine": "italian",
@@ -21,7 +21,7 @@
             }
         },
         {
-            "id": 1,
+            "id": "276d623b-eb47-44c7-8cff-2d6280ff3a35",
             "title": "Green Curry",
             "description": "my favorite thai dish",
             "cuisine": "thai",
@@ -47,7 +47,7 @@
             }
         },
         {
-            "id": 2,
+            "id": "b1b51b60-f659-426d-ab14-b2a115ee9964",
             "title": "Pozole",
             "description": "for when hungover",
             "cuisine": "mexican",

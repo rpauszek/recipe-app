@@ -13,7 +13,8 @@ function createEmptyIngredient(): Ingredient {
 }
 
 function createEmptyRecipe(): RecipeDraft {
-  return {  // ! need to generate uuid
+  return {
+    id: crypto.randomUUID(),
     title: "",
     description: "",
     category: "",
@@ -114,8 +115,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function loadDraft(recipe?: RecipeDraft) {
     logger.info("loading draft")
-    setDraft(recipe ?? createEmptyRecipe());
-    logger.info(`>>> ${JSON.stringify(draft, null, 2)}`);
+    const newDraft = recipe ?? createEmptyRecipe();
+    setDraft(newDraft);
+    logger.info(`>>> ${JSON.stringify(newDraft, null, 2)}`);
     setIsDirty(false);
     setMode("edit");
   }
