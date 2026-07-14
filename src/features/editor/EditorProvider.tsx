@@ -3,14 +3,33 @@ import { EditorContext } from "./EditorContext";
 import { Ingredient, RecipeDraft } from "utils/types";
 import { useApp } from "app/AppContext";
 import { logger } from "utils/logger";
-import { createEmptyIngredient } from "./constructors";
 
 interface EditorProviderProps {
-  initialRecipe: RecipeDraft;
   children: React.ReactNode;
 }
 
-export function EditorProvider({ initialRecipe, children }: EditorProviderProps) {
+function createEmptyIngredient(): Ingredient {
+  return { item: "", quantity: "", unit: "" };
+}
+
+function createEmptyRecipe(): RecipeDraft {
+  return {  // ! need to generate uuid
+    title: "",
+    description: "",
+    category: "",
+    cuisine: "",
+    ingredients: {
+      main: [createEmptyIngredient()],
+    },
+    steps: {
+      main: [""],
+    },
+  };
+}
+
+export function EditorProvider({ children }: EditorProviderProps) {
+  const initialRecipe = createEmptyRecipe();
+
   const [draft, setDraft] = useState<RecipeDraft>(initialRecipe);
   const [isDirty, setIsDirty] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -93,8 +112,10 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
     setIsDirty(true);
   }
 
-  function loadDraft(recipe: RecipeDraft) {
-    setDraft(recipe);
+  function loadDraft(recipe?: RecipeDraft) {
+    logger.info("loading draft")
+    setDraft(recipe ?? createEmptyRecipe());
+    logger.info(`>>> ${JSON.stringify(draft, null, 2)}`);
     setIsDirty(false);
     setMode("edit");
   }

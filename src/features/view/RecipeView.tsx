@@ -28,7 +28,6 @@ function RecipeView({ recipe }: RecipeViewProps) {
       <button
         className={button}
         onClick={() => {
-          logger.info(JSON.stringify(recipe, null, 2));
           loadDraft(recipe);
         }}
       >

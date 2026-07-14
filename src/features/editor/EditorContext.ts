@@ -9,7 +9,7 @@ export interface EditorState {
   updateIngredient: (group: string, index: number, field: keyof Ingredient, value: string) => void;
   addIngredient: (group: string, index?: number) => void;
   removeIngredient: (group: string, index: number) => void;
-  loadDraft: (recipe: RecipeDraft) => void;
+  loadDraft: (recipe?: RecipeDraft) => void;
   save: () => Promise<void>;
   cancel: () => void;
 }
