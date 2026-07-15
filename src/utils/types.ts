@@ -19,10 +19,6 @@ export interface RecipeCollection {
   recipes: Recipe[];
 }
 
-// context types
-export type AppMode = "view" | "edit";
-export type EditKind = "new" | "existing";
-
 // alias React events
 export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>;
 export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement>;

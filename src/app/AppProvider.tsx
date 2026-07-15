@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AppState, AppContext } from "./AppContext";
-import { AppMode, EditKind, Recipe } from "utils/types";
+import { AppState, AppContext, AppMode, EditKind } from "./AppContext";
+import { Recipe } from "utils/types";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = useState<AppMode>("view");

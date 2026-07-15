@@ -1,5 +1,8 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
-import { AppMode, EditKind, Recipe } from "utils/types";
+import { Recipe } from "utils/types";
+
+export type AppMode = "view" | "edit";
+export type EditKind = "new" | "existing";
 
 export interface AppState {
   mode: AppMode;
