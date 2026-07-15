@@ -3,13 +3,20 @@ import RecipeEditor from "features/editor/RecipeEditor";
 import { useApp } from "./AppContext";
 
 import * as styles from "styles/app.css";
+import { EditorProvider } from "features/editor/EditorProvider";
 
 export function MainContent() {
   const { isEditing, selectedRecipe } = useApp();
 
   return (
     <main className={styles.content}>
-      {isEditing ? <RecipeEditor /> : <RecipeView recipe={selectedRecipe} />}
+      {isEditing ? (
+        <EditorProvider>
+          <RecipeEditor />
+        </EditorProvider>
+      ) : (
+        <RecipeView recipe={selectedRecipe} />
+      )}
     </main>
   );
 }

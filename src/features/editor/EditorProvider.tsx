@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EditorContext } from "./EditorContext";
 import { Ingredient, RecipeDraft } from "utils/types";
 import { useApp } from "app/AppContext";
@@ -35,7 +35,23 @@ export function EditorProvider({ children }: EditorProviderProps) {
   const [isDirty, setIsDirty] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const { setMode } = useApp();
+  const { mode, editKind, selectedRecipe, finishEditing } = useApp();
+
+  useEffect(() => {
+    if (mode !== "edit") return;
+
+    switch (editKind) {
+      case "new":
+        logger.info("Starting new editing session");
+        loadDraft();
+        break;
+
+      case "existing":
+        logger.info(`Starting editing session for ${selectedRecipe?.title ?? "null recipe"}`)
+        loadDraft(selectedRecipe!)
+        break;
+    }
+  }, [mode]);
 
   function setField<K extends keyof RecipeDraft>(key: K, value: RecipeDraft[K]) {
     setDraft((prev) => ({
@@ -50,7 +66,7 @@ export function EditorProvider({ children }: EditorProviderProps) {
       const groupIngredients = prev.ingredients[group] ?? [];
 
       const updatedGroup = groupIngredients.map((ing, i) =>
-        i === index ? { ...ing, [field]: value } : ing
+        i === index ? { ...ing, [field]: value } : ing,
       );
 
       return {
@@ -114,18 +130,16 @@ export function EditorProvider({ children }: EditorProviderProps) {
   }
 
   function loadDraft(recipe?: RecipeDraft) {
-    logger.info("loading draft")
+    logger.info("loading draft");
     const newDraft = recipe ?? createEmptyRecipe();
     setDraft(newDraft);
-    logger.info(`>>> ${JSON.stringify(newDraft, null, 2)}`);
     setIsDirty(false);
-    setMode("edit");
   }
 
   async function save() {
     if (!isDirty) {
       logger.info("no dirty, exiting");
-      setMode("view");
+      finishEditing();
       return;
     }
 
@@ -133,17 +147,17 @@ export function EditorProvider({ children }: EditorProviderProps) {
     logger.info("Saving recipe!");
     logger.info(Object.entries(draft).join(", "));
     logger.info(
-      draft.ingredients["main"].map((ing, i) => `${i}: ${JSON.stringify(ing)}`).join(", ")
+      draft.ingredients["main"].map((ing, i) => `${i}: ${JSON.stringify(ing)}`).join(", "),
     );
 
     setIsSaving(false);
     setIsDirty(false);
-    setMode("view");
+    finishEditing();
   }
 
   function cancel() {
     logger.info("Canceling recipe editor!");
-    setMode("view");
+    finishEditing();
   }
 
   const value = {

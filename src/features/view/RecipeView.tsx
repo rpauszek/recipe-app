@@ -1,11 +1,9 @@
 import { Recipe } from "utils/types";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
-import { useEditor } from "features/editor/EditorContext";
+import { useApp } from "app/AppContext";
 
 import { button } from "styles/base.css";
-
-import { logger } from "utils/logger";
 
 interface RecipeViewProps {
   recipe: Recipe | null;
@@ -20,7 +18,7 @@ function RecipeView({ recipe }: RecipeViewProps) {
     );
   }
 
-  const { loadDraft } = useEditor();
+  const { editSelectedRecipe } = useApp();
 
   return (
     <div>
@@ -28,7 +26,7 @@ function RecipeView({ recipe }: RecipeViewProps) {
       <button
         className={button}
         onClick={() => {
-          loadDraft(recipe);
+          editSelectedRecipe();
         }}
       >
         edit

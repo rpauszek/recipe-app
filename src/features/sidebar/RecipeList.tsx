@@ -10,7 +10,7 @@ interface RecipeListProps {
 }
 
 function RecipeList({ recipes }: RecipeListProps) {
-  const { isEditing, selectedRecipe, setSelectedRecipe } = useApp();
+  const { isEditing, selectedRecipe, selectRecipe } = useApp();
 
   return (
     <div className={styles.recipeList({ disabled: isEditing })}>
@@ -19,8 +19,7 @@ function RecipeList({ recipes }: RecipeListProps) {
           key={recipe.id}
           recipe={recipe}
           onClick={() => {
-            logger.info(`clicked ${recipe.title}`);
-            setSelectedRecipe(recipe);
+            selectRecipe(recipe);
           }}
           isSelected={selectedRecipe?.id === recipe.id}
         />
