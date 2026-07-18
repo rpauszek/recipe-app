@@ -9,7 +9,7 @@ import * as styles from "styles/editor.css";
 import { button } from "styles/base.css";
 
 function RecipeEditor() {
-  const { save, cancel } = useEditor();
+  const { draft, save, cancel } = useEditor();
 
   return (
     <div className={styles.recipeEditor}>
@@ -20,8 +20,13 @@ function RecipeEditor() {
         <CuisineSelect />
       </div>
 
-      <IngredientsListEditor />
-      <StepsListEditor />
+      {Object.entries(draft.ingredients).map(([title, entries]) => (
+        <IngredientsListEditor group={title} ingredients={entries} />
+      ))}
+
+      {Object.entries(draft.steps).map(([title, entries]) => (
+        <StepsListEditor group={title} steps={entries} />
+      ))}
 
       <div className={styles.comboRow}>
         <button className={button} onClick={save}>

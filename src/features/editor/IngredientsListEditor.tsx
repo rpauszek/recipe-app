@@ -3,11 +3,14 @@ import { Ingredient, InputKeyBoardEvt } from "utils/types";
 import IngredientEditor from "./IngredientEditor";
 import { useEditor } from "./EditorContext";
 
-function IngredientsListEditor() {
+interface IngredientsListEditorProps {
+  group: string;
+  ingredients: Ingredient[];
+}
+
+function IngredientsListEditor({ group, ingredients }: IngredientsListEditorProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
-  const { draft, updateIngredient, addIngredient, removeIngredient } = useEditor();
-  const GROUP = "main";
-  const ingredients = draft.ingredients[GROUP] ?? [];
+  const { updateIngredient, addIngredient, removeIngredient } = useEditor();
 
   useEffect(() => {
     lastInputRef.current?.focus();
@@ -16,16 +19,16 @@ function IngredientsListEditor() {
   const handleTabOnLastIngredient = (evt: InputKeyBoardEvt, index: number) => {
     if (evt.key === "Tab" && !evt.shiftKey && index === ingredients.length - 1) {
       evt.preventDefault();
-      addIngredient(GROUP);
+      addIngredient(group);
     }
   };
 
   const callbacks = {
     handleInputChange: (index: number, field: keyof Ingredient, value: string) => {
-      updateIngredient(GROUP, index, field, value);
+      updateIngredient(group, index, field, value);
     },
-    addIngredient: (index?: number) => addIngredient(GROUP, index),
-    removeIngredient: (index: number) => removeIngredient(GROUP, index),
+    addIngredient: (index?: number) => addIngredient(group, index),
+    removeIngredient: (index: number) => removeIngredient(group, index),
     handleTabOnLastIngredient: handleTabOnLastIngredient,
   };
 

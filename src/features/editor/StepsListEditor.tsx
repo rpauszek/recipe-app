@@ -3,11 +3,14 @@ import { InputKeyBoardEvt } from "utils/types";
 import StepEditor from "./StepEditor";
 import { useEditor } from "./EditorContext";
 
-function StepsListEditor() {
+interface StepsListEditorProps {
+  group: string;
+  steps: string[];
+}
+
+function StepsListEditor({ group, steps }: StepsListEditorProps) {
   const lastInputRef = useRef<HTMLTextAreaElement>(null);
-  const { draft, updateStep, addStep, removeStep } = useEditor();
-  const GROUP = "main";
-  const steps = draft.steps[GROUP] ?? [];
+  const { updateStep, addStep, removeStep } = useEditor();
 
   useEffect(() => {
     lastInputRef.current?.focus();
@@ -16,16 +19,16 @@ function StepsListEditor() {
   const handleTabOnLastStep = (evt: InputKeyBoardEvt, index: number) => {
     if (evt.key === "Tab" && !evt.shiftKey && index === steps.length - 1) {
       evt.preventDefault();
-      addStep(GROUP);
+      addStep(group);
     }
   };
 
   const callbacks = {
     handleInputChange: (index: number, value: string) => {
-      updateStep(GROUP, index, value);
+      updateStep(group, index, value);
     },
-    addStep: (index?: number) => addStep(GROUP, index),
-    removeStep: (index: number) => removeStep(GROUP, index),
+    addStep: (index?: number) => addStep(group, index),
+    removeStep: (index: number) => removeStep(group, index),
     handleTabOnLastStep: handleTabOnLastStep,
   };
 
