@@ -162,13 +162,10 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   const value = {
     draft,
-    isDirty,
-    isSaving,
     setField,
     updateIngredient,
     addIngredient,
     removeIngredient,
-    loadDraft,
     save,
     cancel,
   };
