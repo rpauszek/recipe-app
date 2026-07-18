@@ -39,10 +39,8 @@
             "steps": {
                 "curry": ["make the curry"],
                 "main": [
-                    "Cook spaghetti according to package instructions.",
-                    "Brown the beef in a pan.",
-                    "Add tomato sauce and simmer 15 minutes.",
-                    "Serve sauce over pasta."
+                    "Do curry stuff.",
+                    "Eat the curry."
                 ]
             }
         },

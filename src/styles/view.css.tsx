@@ -19,3 +19,11 @@ export const quantity = style({
 export const item = style({
   textAlign: "left",
 });
+
+export const steps = style({
+  paddingBottom: "15px",
+});
+
+export const step = style({
+  paddingBottom: "5px",
+});

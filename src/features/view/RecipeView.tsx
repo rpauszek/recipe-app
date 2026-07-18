@@ -1,6 +1,7 @@
 import { Recipe } from "utils/types";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
+import StepsView from "./StepsView";
 import { useApp } from "app/AppContext";
 
 import { button } from "styles/base.css";
@@ -38,6 +39,10 @@ function RecipeView({ recipe }: RecipeViewProps) {
 
       {Object.entries(recipe.ingredients).map(([title, ingredients]) => (
         <IngredientsView title={title} ingredients={ingredients} />
+      ))}
+
+      {Object.entries(recipe.steps).map(([title, steps]) => (
+        <StepsView title={title} steps={steps} />
       ))}
     </div>
   );
