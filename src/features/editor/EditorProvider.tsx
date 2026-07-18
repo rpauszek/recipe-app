@@ -47,8 +47,8 @@ export function EditorProvider({ children }: EditorProviderProps) {
         break;
 
       case "existing":
-        logger.info(`Starting editing session for ${selectedRecipe?.title ?? "null recipe"}`)
-        loadDraft(selectedRecipe!)
+        logger.info(`Starting editing session for ${selectedRecipe?.title ?? "null recipe"}`);
+        loadDraft(selectedRecipe!);
         break;
     }
   }, [mode]);
@@ -129,6 +129,68 @@ export function EditorProvider({ children }: EditorProviderProps) {
     setIsDirty(true);
   }
 
+  function updateStep(group: string, index: number, value: string) {
+    setDraft((prev) => {
+      const groupSteps = prev.steps[group] ?? [];
+
+      const updatedGroup = groupSteps.map((step, i) => (i === index ? value : step));
+
+      return {
+        ...prev,
+        steps: {
+          ...prev.steps,
+          [group]: updatedGroup,
+        },
+      };
+    });
+
+    setIsDirty(true);
+  }
+
+  function addStep(group: string, index?: number) {
+    setDraft((prev) => {
+      const groupSteps = prev.steps[group] ?? [];
+
+      const blankStep = "";
+
+      let updatedGroup: string[];
+      if (index !== undefined) {
+        const insertAt = index + 1;
+        updatedGroup = [...groupSteps.slice(0, insertAt), blankStep, ...groupSteps.slice(insertAt)];
+      } else {
+        updatedGroup = [...groupSteps, blankStep];
+      }
+
+      return {
+        ...prev,
+        steps: {
+          ...prev.steps,
+          [group]: updatedGroup,
+        },
+      };
+    });
+
+    setIsDirty(true);
+  }
+
+  function removeStep(group: string, index: number) {
+    setDraft((prev) => {
+      const groupSteps = prev.steps[group] ?? [];
+
+      const updatedGroup = groupSteps.filter((_, i) => i !== index);
+
+      return {
+        ...prev,
+        steps: {
+          ...prev.steps,
+          [group]: updatedGroup,
+        },
+      };
+    });
+
+    setIsDirty(true);
+  }
+
   function loadDraft(recipe?: RecipeDraft) {
     logger.info("loading draft");
     const newDraft = recipe ?? createEmptyRecipe();
@@ -166,6 +228,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
     updateIngredient,
     addIngredient,
     removeIngredient,
+    updateStep,
+    addStep,
+    removeStep,
     save,
     cancel,
   };

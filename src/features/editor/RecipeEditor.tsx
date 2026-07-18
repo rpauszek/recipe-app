@@ -2,6 +2,7 @@ import TitleInput from "./TitleInput";
 import CategorySelect from "./CategorySelect";
 import CuisineSelect from "./CuisineSelect";
 import IngredientsListEditor from "./IngredientsListEditor";
+import StepsListEditor from "./StepsListEditor";
 import { useEditor } from "./EditorContext";
 
 import * as styles from "styles/editor.css";
@@ -20,6 +21,7 @@ function RecipeEditor() {
       </div>
 
       <IngredientsListEditor />
+      <StepsListEditor />
 
       <div className={styles.comboRow}>
         <button className={button} onClick={save}>

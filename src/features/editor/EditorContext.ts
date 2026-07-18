@@ -7,6 +7,9 @@ export interface EditorState {
   updateIngredient: (group: string, index: number, field: keyof Ingredient, value: string) => void;
   addIngredient: (group: string, index?: number) => void;
   removeIngredient: (group: string, index: number) => void;
+  updateStep: (group: string, index: number, value: string) => void;
+  addStep: (group: string, index?: number) => void;
+  removeStep: (group: string, index: number) => void;
   save: () => Promise<void>;
   cancel: () => void;
 }

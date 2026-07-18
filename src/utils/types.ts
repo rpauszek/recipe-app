@@ -20,8 +20,8 @@ export interface RecipeCollection {
 }
 
 // alias React events
-export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>;
-export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement>;
+export type InputChangeEvt = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 // styling interfaces
 export interface Color {
