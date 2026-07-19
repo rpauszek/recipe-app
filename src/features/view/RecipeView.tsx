@@ -32,17 +32,15 @@ function RecipeView({ recipe }: RecipeViewProps) {
       >
         edit
       </button>
-
       <div>{recipe.description}</div>
-
       <div>{cuisineFlags[recipe.cuisine]}</div>
 
-      {Object.entries(recipe.ingredients).map(([title, ingredients]) => (
-        <IngredientsView title={title} ingredients={ingredients} />
+      {recipe.ingredients.map((ingredients) => (
+        <IngredientsView ingredients={ingredients} key={ingredients.id} />
       ))}
 
-      {Object.entries(recipe.steps).map(([title, steps]) => (
-        <StepsView title={title} steps={steps} />
+      {recipe.steps.map((steps) => (
+        <StepsView steps={steps} key={steps.id} />
       ))}
     </div>
   );

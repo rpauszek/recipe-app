@@ -1,7 +1,5 @@
-export interface Ingredient {
-  item: string;
-  quantity: string;
-  unit: string;
+export interface RecipeCollection {
+  recipes: Recipe[];
 }
 
 export interface Recipe {
@@ -10,13 +8,27 @@ export interface Recipe {
   description: string;
   category: string;
   cuisine: string;
-  ingredients: Record<string, Ingredient[]>;
-  steps: Record<string, string[]>;
+  ingredients: IngredientList[];
+  steps: StepsList[];
 }
 export type RecipeDraft = Recipe;
 
-export interface RecipeCollection {
-  recipes: Recipe[];
+export interface IngredientList {
+  id: string;
+  title: string;
+  entries: Ingredient[];
+}
+
+export interface StepsList {
+  id: string;
+  title: string;
+  entries: string[];
+}
+
+export interface Ingredient {
+  item: string;
+  quantity: string;
+  unit: string;
 }
 
 // alias React events

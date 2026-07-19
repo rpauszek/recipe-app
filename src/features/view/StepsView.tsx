@@ -1,16 +1,12 @@
+import { StepsList } from "utils/types";
 import * as styles from "styles/view.css.tsx";
 
-interface StepsViewProps {
-  title: string;
-  steps: string[];
-}
-
-export default function IngredientsView({ title, steps }: StepsViewProps) {
+export default function IngredientsView({ steps }: { steps: StepsList }) {
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>{steps.title}</h1>
       <div className={styles.steps}>
-        {steps.map((step, index) => (
+        {steps.entries.map((step, index) => (
           <div key={index} className={styles.step}>
             {step}
           </div>

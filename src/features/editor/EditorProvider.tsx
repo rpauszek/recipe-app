@@ -1,39 +1,20 @@
 import { useState, useEffect } from "react";
 import { EditorContext } from "./EditorContext";
-import { Ingredient, RecipeDraft } from "utils/types";
+import { Ingredient, IngredientList, RecipeDraft, StepsList } from "utils/types";
 import { useApp } from "app/AppContext";
 import { logger } from "utils/logger";
+import * as methods from "./draft-methods";
 
 interface EditorProviderProps {
   children: React.ReactNode;
 }
 
-function createEmptyIngredient(): Ingredient {
-  return { item: "", quantity: "", unit: "" };
-}
-
-function createEmptyRecipe(): RecipeDraft {
-  return {
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    category: "",
-    cuisine: "",
-    ingredients: {
-      main: [createEmptyIngredient()],
-    },
-    steps: {
-      main: [""],
-    },
-  };
-}
-
 export function EditorProvider({ children }: EditorProviderProps) {
-  const initialRecipe = createEmptyRecipe();
+  const initialRecipe = methods.createEmptyRecipe();
 
   const [draft, setDraft] = useState<RecipeDraft>(initialRecipe);
   const [isDirty, setIsDirty] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [, setIsSaving] = useState(false);
 
   const { mode, editKind, selectedRecipe, finishEditing } = useApp();
 
@@ -61,131 +42,72 @@ export function EditorProvider({ children }: EditorProviderProps) {
     setIsDirty(true);
   }
 
-  function updateIngredient(group: string, index: number, field: keyof Ingredient, value: string) {
-    setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const updatedGroup = groupIngredients.map((ing, i) =>
-        i === index ? { ...ing, [field]: value } : ing,
+  function updateIngredient(listId: string, index: number, field: keyof Ingredient, value: string) {
+    setDraft((prev: RecipeDraft) => {
+      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
+      const updatedList: IngredientList = methods.updateIngredient(
+        listToUpdate,
+        index,
+        field,
+        value,
       );
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function addIngredient(group: string, index?: number) {
+  function addIngredient(listId: string, index?: number) {
     setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const blankIngredient = createEmptyIngredient();
-
-      let updatedGroup: Ingredient[];
-      if (index !== undefined) {
-        const insertAt = index + 1;
-        updatedGroup = [
-          ...groupIngredients.slice(0, insertAt),
-          blankIngredient,
-          ...groupIngredients.slice(insertAt),
-        ];
-      } else {
-        updatedGroup = [...groupIngredients, blankIngredient];
-      }
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
+      const updatedList = methods.addIngredient(listToUpdate, index);
+      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function removeIngredient(group: string, index: number) {
+  function removeIngredient(listId: string, index: number) {
     setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const updatedGroup = groupIngredients.filter((_, i) => i !== index);
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
+      const updatedList = methods.removeIngredient(listToUpdate, index);
+      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function updateStep(group: string, index: number, value: string) {
+  function updateStep(listId: string, index: number, value: string) {
     setDraft((prev) => {
-      const groupSteps = prev.steps[group] ?? [];
-
-      const updatedGroup = groupSteps.map((step, i) => (i === index ? value : step));
-
-      return {
-        ...prev,
-        steps: {
-          ...prev.steps,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
+      const updatedList: StepsList = methods.updateStep(listToUpdate, index, value);
+      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
     });
 
     setIsDirty(true);
   }
 
-  function addStep(group: string, index?: number) {
+  function addStep(listId: string, index?: number) {
     setDraft((prev) => {
-      const groupSteps = prev.steps[group] ?? [];
-
-      const blankStep = "";
-
-      let updatedGroup: string[];
-      if (index !== undefined) {
-        const insertAt = index + 1;
-        updatedGroup = [...groupSteps.slice(0, insertAt), blankStep, ...groupSteps.slice(insertAt)];
-      } else {
-        updatedGroup = [...groupSteps, blankStep];
-      }
-
-      return {
-        ...prev,
-        steps: {
-          ...prev.steps,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
+      const updatedList = methods.addStep(listToUpdate, index);
+      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
     });
 
     setIsDirty(true);
   }
 
-  function removeStep(group: string, index: number) {
+  function removeStep(listId: string, index: number) {
     setDraft((prev) => {
-      const groupSteps = prev.steps[group] ?? [];
-
-      const updatedGroup = groupSteps.filter((_, i) => i !== index);
-
-      return {
-        ...prev,
-        steps: {
-          ...prev.steps,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
+      const updatedList = methods.removeStep(listToUpdate, index);
+      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
     });
 
     setIsDirty(true);
@@ -193,7 +115,7 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function loadDraft(recipe?: RecipeDraft) {
     logger.info("loading draft");
-    const newDraft = recipe ?? createEmptyRecipe();
+    const newDraft = recipe ?? methods.createEmptyRecipe();
     setDraft(newDraft);
     setIsDirty(false);
   }
@@ -208,9 +130,6 @@ export function EditorProvider({ children }: EditorProviderProps) {
     setIsSaving(true);
     logger.info("Saving recipe!");
     logger.info(Object.entries(draft).join(", "));
-    logger.info(
-      draft.ingredients["main"].map((ing, i) => `${i}: ${JSON.stringify(ing)}`).join(", "),
-    );
 
     setIsSaving(false);
     setIsDirty(false);

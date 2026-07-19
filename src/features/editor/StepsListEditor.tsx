@@ -2,46 +2,42 @@ import { useEffect, useRef } from "react";
 import { InputKeyBoardEvt } from "utils/types";
 import StepEditor from "./StepEditor";
 import { useEditor } from "./EditorContext";
+import { StepsList } from "utils/types";
 
-interface StepsListEditorProps {
-  group: string;
-  steps: string[];
-}
-
-function StepsListEditor({ group, steps }: StepsListEditorProps) {
+function StepsListEditor({ steps }: { steps: StepsList }) {
   const lastInputRef = useRef<HTMLTextAreaElement>(null);
   const { updateStep, addStep, removeStep } = useEditor();
 
   useEffect(() => {
     lastInputRef.current?.focus();
-  }, [steps.length]);
+  }, [steps.entries.length]);
 
   const handleTabOnLastStep = (evt: InputKeyBoardEvt, index: number) => {
-    if (evt.key === "Tab" && !evt.shiftKey && index === steps.length - 1) {
+    if (evt.key === "Tab" && !evt.shiftKey && index === steps.entries.length - 1) {
       evt.preventDefault();
-      addStep(group);
+      addStep(steps.id);
     }
   };
 
   const callbacks = {
     handleInputChange: (index: number, value: string) => {
-      updateStep(group, index, value);
+      updateStep(steps.id, index, value);
     },
-    addStep: (index?: number) => addStep(group, index),
-    removeStep: (index: number) => removeStep(group, index),
+    addStep: (index?: number) => addStep(steps.id, index),
+    removeStep: (index: number) => removeStep(steps.id, index),
     handleTabOnLastStep: handleTabOnLastStep,
   };
 
   return (
     <div>
       <h1>Steps</h1>
-      {steps.map((step, index) => (
+      {steps.entries.map((step, index) => (
         <StepEditor
           key={index}
           index={index}
           step={step}
           callbacks={callbacks}
-          inputRef={index === steps.length - 1 ? lastInputRef : undefined}
+          inputRef={index === steps.entries.length - 1 ? lastInputRef : undefined}
         />
       ))}
     </div>

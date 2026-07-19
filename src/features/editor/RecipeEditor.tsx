@@ -20,12 +20,12 @@ function RecipeEditor() {
         <CuisineSelect />
       </div>
 
-      {Object.entries(draft.ingredients).map(([title, entries]) => (
-        <IngredientsListEditor group={title} ingredients={entries} />
+      {draft.ingredients.map((ingredients) => (
+        <IngredientsListEditor key={ingredients.id} ingredients={ingredients} />
       ))}
 
-      {Object.entries(draft.steps).map(([title, entries]) => (
-        <StepsListEditor group={title} steps={entries} />
+      {draft.steps.map((steps) => (
+        <StepsListEditor key={steps.id} steps={steps} />
       ))}
 
       <div className={styles.comboRow}>
