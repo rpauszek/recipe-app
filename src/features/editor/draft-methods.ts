@@ -1,6 +1,6 @@
-import { Ingredient, IngredientList, RecipeDraft, StepsList } from "utils/types";
+import { Ingredient, IngredientList, RecipeDraft, StepsList, BaseList } from "utils/types";
 
-function createEmptyIngredient(): Ingredient {
+export function createEmptyIngredient(): Ingredient {
   return { item: "", quantity: "", unit: "" };
 }
 
@@ -28,42 +28,43 @@ export function createEmptyRecipe(): RecipeDraft {
   };
 }
 
-export function findIngredientList(
-  ingredients: IngredientList[],
-  requestedId: string,
-): IngredientList {
-  const requestedList: IngredientList | undefined = ingredients.find(
-    (list) => list.id === requestedId,
-  );
+export function findListById<T>(
+    listArray: BaseList<T>[],
+    requestedId: string,
+): BaseList<T> {
+    const requestedList = listArray.find((list) => list.id === requestedId);
+    if (!requestedList) {
+        throw new Error(`Unknown group: ${requestedId}`);
+    }
+    return requestedList;
+}
 
-  if (!requestedList) {
-    throw new Error(`Unknown ingredient group: ${requestedId}`);
+export function updateListArray<T>(
+    prevArray: BaseList<T>[],
+    updatedList: BaseList<T>,
+): BaseList<T>[] {
+    const listId = updatedList.id;
+  return prevArray.map((list) => (list.id === listId ? updatedList : list));
+}
+
+export function addItem<T>(list: BaseList<T>, blankItem: T, index?: number): BaseList<T> {
+  const entries: T[] = list.entries;
+
+  let updatedEntries: T[];
+  if (index !== undefined) {
+    const insertAt = index + 1;
+    updatedEntries = [...entries.slice(0, insertAt), blankItem, ...entries.slice(insertAt)];
+  } else {
+    updatedEntries = [...entries, blankItem];
   }
 
-  return requestedList;
+  return { ...list, entries: updatedEntries };
 }
 
-export function findStepsList(steps: StepsList[], requestedId: string): StepsList {
-  const requestedList: StepsList | undefined = steps.find((list) => list.id === requestedId);
-
-  if (!requestedList) {
-    throw new Error(`Unknown steps group: ${requestedId}`);
-  }
-
-  return requestedList;
-}
-
-export function updateIngredients(
-  prevIngredients: IngredientList[],
-  updatedList: IngredientList,
-): IngredientList[] {
-  const listId = updatedList.id;
-  return prevIngredients.map((list) => (list.id === listId ? updatedList : list));
-}
-
-export function updateSteps(prevSteps: StepsList[], updatedList: StepsList): StepsList[] {
-  const listId = updatedList.id;
-  return prevSteps.map((list) => (list.id === listId ? updatedList : list));
+export function removeItem<T>(list: BaseList<T>, index: number): BaseList<T> {
+  const entries: T[] = list.entries;
+  const updatedEntries: T[] = entries.filter((_, i) => i !== index);
+  return { ...list, entries: updatedEntries };
 }
 
 /**
@@ -88,49 +89,8 @@ export function updateIngredient(
   return { ...list, entries: updatedEntries };
 }
 
-export function addIngredient(list: IngredientList, index?: number): IngredientList {
-  const entries: Ingredient[] = list.entries;
-  const blankIngredient: Ingredient = createEmptyIngredient();
-
-  let updatedEntries: Ingredient[];
-  if (index !== undefined) {
-    const insertAt = index + 1;
-    updatedEntries = [...entries.slice(0, insertAt), blankIngredient, ...entries.slice(insertAt)];
-  } else {
-    updatedEntries = [...entries, blankIngredient];
-  }
-
-  return { ...list, entries: updatedEntries };
-}
-
-export function removeIngredient(list: IngredientList, index: number): IngredientList {
-  const entries: Ingredient[] = list.entries;
-  const updatedEntries: Ingredient[] = entries.filter((_, i) => i !== index);
-  return { ...list, entries: updatedEntries };
-}
-
 export function updateStep(list: StepsList, index: number, value: string): StepsList {
   const updatedEntries = list.entries.map((step, i) => (i === index ? value : step));
   return { ...list, entries: updatedEntries };
 }
 
-export function addStep(list: StepsList, index?: number): StepsList {
-  const entries: string[] = list.entries;
-  const blankStep = "";
-
-  let updatedEntries: string[];
-  if (index !== undefined) {
-    const insertAt = index + 1;
-    updatedEntries = [...entries.slice(0, insertAt), blankStep, ...entries.slice(insertAt)];
-  } else {
-    updatedEntries = [...entries, blankStep];
-  }
-
-  return { ...list, entries: updatedEntries };
-}
-
-export function removeStep(list: StepsList, index: number): StepsList {
-  const entries: string[] = list.entries;
-  const updatedEntries: string[] = entries.filter((_, i) => i !== index);
-  return { ...list, entries: updatedEntries };
-}

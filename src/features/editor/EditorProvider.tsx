@@ -44,14 +44,14 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function updateIngredient(listId: string, index: number, field: keyof Ingredient, value: string) {
     setDraft((prev: RecipeDraft) => {
-      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
       const updatedList: IngredientList = methods.updateIngredient(
         listToUpdate,
         index,
         field,
         value,
       );
-      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
       return { ...prev, ingredients: updatedIngredients };
     });
 
@@ -60,9 +60,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function addIngredient(listId: string, index?: number) {
     setDraft((prev) => {
-      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
-      const updatedList = methods.addIngredient(listToUpdate, index);
-      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
+      const updatedList = methods.addItem(listToUpdate, methods.createEmptyIngredient(), index)
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
       return { ...prev, ingredients: updatedIngredients };
     });
 
@@ -71,9 +71,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function removeIngredient(listId: string, index: number) {
     setDraft((prev) => {
-      const listToUpdate: IngredientList = methods.findIngredientList(prev.ingredients, listId);
-      const updatedList = methods.removeIngredient(listToUpdate, index);
-      const updatedIngredients = methods.updateIngredients(prev.ingredients, updatedList);
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
+      const updatedList = methods.removeItem(listToUpdate, index);
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
       return { ...prev, ingredients: updatedIngredients };
     });
 
@@ -82,9 +82,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function updateStep(listId: string, index: number, value: string) {
     setDraft((prev) => {
-      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
       const updatedList: StepsList = methods.updateStep(listToUpdate, index, value);
-      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
       return { ...prev, steps: updatedSteps };
     });
 
@@ -93,9 +93,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function addStep(listId: string, index?: number) {
     setDraft((prev) => {
-      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
-      const updatedList = methods.addStep(listToUpdate, index);
-      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
+      const updatedList = methods.addItem(listToUpdate, "", index)
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
       return { ...prev, steps: updatedSteps };
     });
 
@@ -104,9 +104,9 @@ export function EditorProvider({ children }: EditorProviderProps) {
 
   function removeStep(listId: string, index: number) {
     setDraft((prev) => {
-      const listToUpdate: StepsList = methods.findStepsList(prev.steps, listId);
-      const updatedList = methods.removeStep(listToUpdate, index);
-      const updatedSteps = methods.updateSteps(prev.steps, updatedList);
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
+      const updatedList = methods.removeItem(listToUpdate, index);
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
       return { ...prev, steps: updatedSteps };
     });
 

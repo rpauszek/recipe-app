@@ -13,17 +13,14 @@ export interface Recipe {
 }
 export type RecipeDraft = Recipe;
 
-export interface IngredientList {
+export interface BaseList<T> {
   id: string;
   title: string;
-  entries: Ingredient[];
+  entries: T[];
 }
 
-export interface StepsList {
-  id: string;
-  title: string;
-  entries: string[];
-}
+export type IngredientList = BaseList<Ingredient>
+export type StepsList = BaseList<string>
 
 export interface Ingredient {
   item: string;
