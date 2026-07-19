@@ -1,11 +1,10 @@
 import { Recipe } from "utils/types";
 import { cuisineFlags } from "utils/cuisines";
 import IngredientsView from "./IngredientsView";
-import { useEditor } from "features/editor/EditorContext";
+import StepsView from "./StepsView";
+import { useApp } from "app/AppContext";
 
 import { button } from "styles/base.css";
-
-import { logger } from "utils/logger";
 
 interface RecipeViewProps {
   recipe: Recipe | null;
@@ -20,7 +19,7 @@ function RecipeView({ recipe }: RecipeViewProps) {
     );
   }
 
-  const { loadDraft } = useEditor();
+  const { editSelectedRecipe } = useApp();
 
   return (
     <div>
@@ -28,19 +27,20 @@ function RecipeView({ recipe }: RecipeViewProps) {
       <button
         className={button}
         onClick={() => {
-          logger.info(JSON.stringify(recipe, null, 2));
-          loadDraft(recipe);
+          editSelectedRecipe();
         }}
       >
         edit
       </button>
-
       <div>{recipe.description}</div>
-
       <div>{cuisineFlags[recipe.cuisine]}</div>
 
-      {Object.entries(recipe.ingredients).map(([title, ingredients]) => (
-        <IngredientsView title={title} ingredients={ingredients} />
+      {recipe.ingredients.map((ingredients) => (
+        <IngredientsView ingredients={ingredients} key={ingredients.id} />
+      ))}
+
+      {recipe.steps.map((steps) => (
+        <StepsView steps={steps} key={steps.id} />
       ))}
     </div>
   );

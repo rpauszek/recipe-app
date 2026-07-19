@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EditorContext } from "./EditorContext";
-import { Ingredient, RecipeDraft } from "utils/types";
+import { Ingredient, IngredientList, RecipeDraft, StepsList } from "utils/types";
 import { useApp } from "app/AppContext";
 import { logger } from "utils/logger";
-import { createEmptyIngredient } from "./constructors";
+import * as methods from "./draft-methods";
 
 interface EditorProviderProps {
-  initialRecipe: RecipeDraft;
   children: React.ReactNode;
 }
 
-export function EditorProvider({ initialRecipe, children }: EditorProviderProps) {
+export function EditorProvider({ children }: EditorProviderProps) {
+  const initialRecipe = methods.createEmptyRecipe();
+
   const [draft, setDraft] = useState<RecipeDraft>(initialRecipe);
   const [isDirty, setIsDirty] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [, setIsSaving] = useState(false);
 
-  const { setMode } = useApp();
+  const { mode, editKind, selectedRecipe, finishEditing } = useApp();
+
+  useEffect(() => {
+    if (mode !== "edit") return;
+
+    switch (editKind) {
+      case "new":
+        logger.info("Starting new editing session");
+        loadDraft();
+        break;
+
+      case "existing":
+        logger.info(`Starting editing session for ${selectedRecipe?.title ?? "null recipe"}`);
+        loadDraft(selectedRecipe!);
+        break;
+    }
+  }, [mode]);
 
   function setField<K extends keyof RecipeDraft>(key: K, value: RecipeDraft[K]) {
     setDraft((prev) => ({
@@ -25,113 +42,114 @@ export function EditorProvider({ initialRecipe, children }: EditorProviderProps)
     setIsDirty(true);
   }
 
-  function updateIngredient(group: string, index: number, field: keyof Ingredient, value: string) {
-    setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const updatedGroup = groupIngredients.map((ing, i) =>
-        i === index ? { ...ing, [field]: value } : ing
+  function updateIngredient(listId: string, index: number, field: keyof Ingredient, value: string) {
+    setDraft((prev: RecipeDraft) => {
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
+      const updatedList: IngredientList = methods.updateIngredient(
+        listToUpdate,
+        index,
+        field,
+        value,
       );
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function addIngredient(group: string, index?: number) {
+  function addIngredient(listId: string, index?: number) {
     setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const blankIngredient = createEmptyIngredient();
-
-      let updatedGroup: Ingredient[];
-      if (index !== undefined) {
-        const insertAt = index + 1;
-        updatedGroup = [
-          ...groupIngredients.slice(0, insertAt),
-          blankIngredient,
-          ...groupIngredients.slice(insertAt),
-        ];
-      } else {
-        updatedGroup = [...groupIngredients, blankIngredient];
-      }
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
+      const updatedList = methods.addItem(listToUpdate, methods.createEmptyIngredient(), index)
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function removeIngredient(group: string, index: number) {
+  function removeIngredient(listId: string, index: number) {
     setDraft((prev) => {
-      const groupIngredients = prev.ingredients[group] ?? [];
-
-      const updatedGroup = groupIngredients.filter((_, i) => i !== index);
-
-      return {
-        ...prev,
-        ingredients: {
-          ...prev.ingredients,
-          [group]: updatedGroup,
-        },
-      };
+      const listToUpdate: IngredientList = methods.findListById(prev.ingredients, listId);
+      const updatedList = methods.removeItem(listToUpdate, index);
+      const updatedIngredients = methods.updateListArray(prev.ingredients, updatedList);
+      return { ...prev, ingredients: updatedIngredients };
     });
 
     setIsDirty(true);
   }
 
-  function loadDraft(recipe: RecipeDraft) {
-    setDraft(recipe);
+  function updateStep(listId: string, index: number, value: string) {
+    setDraft((prev) => {
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
+      const updatedList: StepsList = methods.updateStep(listToUpdate, index, value);
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
+    });
+
+    setIsDirty(true);
+  }
+
+  function addStep(listId: string, index?: number) {
+    setDraft((prev) => {
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
+      const updatedList = methods.addItem(listToUpdate, "", index)
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
+    });
+
+    setIsDirty(true);
+  }
+
+  function removeStep(listId: string, index: number) {
+    setDraft((prev) => {
+      const listToUpdate: StepsList = methods.findListById(prev.steps, listId);
+      const updatedList = methods.removeItem(listToUpdate, index);
+      const updatedSteps = methods.updateListArray(prev.steps, updatedList);
+      return { ...prev, steps: updatedSteps };
+    });
+
+    setIsDirty(true);
+  }
+
+  function loadDraft(recipe?: RecipeDraft) {
+    logger.info("loading draft");
+    const newDraft = recipe ?? methods.createEmptyRecipe();
+    setDraft(newDraft);
     setIsDirty(false);
-    setMode("edit");
   }
 
   async function save() {
     if (!isDirty) {
       logger.info("no dirty, exiting");
-      setMode("view");
+      finishEditing();
       return;
     }
 
     setIsSaving(true);
     logger.info("Saving recipe!");
     logger.info(Object.entries(draft).join(", "));
-    logger.info(
-      draft.ingredients["main"].map((ing, i) => `${i}: ${JSON.stringify(ing)}`).join(", ")
-    );
 
     setIsSaving(false);
     setIsDirty(false);
-    setMode("view");
+    finishEditing();
   }
 
   function cancel() {
     logger.info("Canceling recipe editor!");
-    setMode("view");
+    finishEditing();
   }
 
   const value = {
     draft,
-    isDirty,
-    isSaving,
     setField,
     updateIngredient,
     addIngredient,
     removeIngredient,
-    loadDraft,
+    updateStep,
+    addStep,
+    removeStep,
     save,
     cancel,
   };

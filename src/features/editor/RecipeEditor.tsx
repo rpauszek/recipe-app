@@ -2,13 +2,14 @@ import TitleInput from "./TitleInput";
 import CategorySelect from "./CategorySelect";
 import CuisineSelect from "./CuisineSelect";
 import IngredientsListEditor from "./IngredientsListEditor";
+import StepsListEditor from "./StepsListEditor";
 import { useEditor } from "./EditorContext";
 
 import * as styles from "styles/editor.css";
 import { button } from "styles/base.css";
 
 function RecipeEditor() {
-  const { save, cancel } = useEditor();
+  const { draft, save, cancel } = useEditor();
 
   return (
     <div className={styles.recipeEditor}>
@@ -19,7 +20,13 @@ function RecipeEditor() {
         <CuisineSelect />
       </div>
 
-      <IngredientsListEditor />
+      {draft.ingredients.map((ingredients) => (
+        <IngredientsListEditor key={ingredients.id} ingredients={ingredients} />
+      ))}
+
+      {draft.steps.map((steps) => (
+        <StepsListEditor key={steps.id} steps={steps} />
+      ))}
 
       <div className={styles.comboRow}>
         <button className={button} onClick={save}>

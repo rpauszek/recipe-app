@@ -1,62 +1,89 @@
 {
-    "recipes": [
+  "recipes": [
+    {
+      "id": "217f6405-c306-4865-8bda-1ccbaae899e1",
+      "title": "Spaghetti Bolognese",
+      "description": "Classic Italian pasta with meat sauce",
+      "cuisine": "italian",
+      "ingredients": [
         {
-            "id": 0,
-            "title": "Spaghetti Bolognese",
-            "description": "Classic Italian pasta with meat sauce",
-            "cuisine": "italian",
-            "ingredients": {
-                "main": [
-                    { "item": "spaghetti", "quantity": "300", "unit": "g" },
-                    { "item": "ground beef", "quantity": "300", "unit": "g" }
-                ]
-            },
-            "steps": {
-                "main": [
-                    "Cook spaghetti according to package instructions.",
-                    "Brown the beef in a pan.",
-                    "Add tomato sauce and simmer 15 minutes.",
-                    "Serve sauce over pasta."
-                ]
-            }
-        },
-        {
-            "id": 1,
-            "title": "Green Curry",
-            "description": "my favorite thai dish",
-            "cuisine": "thai",
-            "ingredients": {
-                "curry": [
-                    { "item": "thai basil", "quantity": "1", "unit": "bunch" },
-                    { "item": "coconut milk", "quantity": "250", "unit": "mL" }
-                ],
-                "main": [
-                    { "item": "rice", "quantity": "1", "unit": "c" },
-                    { "item": "chicken", "quantity": "300", "unit": "g" },
-                    { "item": "salt, to taste", "quantity": "", "unit": "" }
-                ]
-            },
-            "steps": {
-                "curry": ["make the curry"],
-                "main": [
-                    "Cook spaghetti according to package instructions.",
-                    "Brown the beef in a pan.",
-                    "Add tomato sauce and simmer 15 minutes.",
-                    "Serve sauce over pasta."
-                ]
-            }
-        },
-        {
-            "id": 2,
-            "title": "Pozole",
-            "description": "for when hungover",
-            "cuisine": "mexican",
-            "ingredients": {
-                "main": [{ "item": "pork", "quantity": "1", "unit": "kg" }]
-            },
-            "steps": {
-                "main": ["make the pozole.", "eat the pozole."]
-            }
+          "id": "8a8c4583-485a-4760-8f0b-6c6d16d8d132",
+          "title": "main",
+          "entries": [
+            { "item": "spaghetti", "quantity": "300", "unit": "g" },
+            { "item": "ground beef", "quantity": "300", "unit": "g" }
+          ]
         }
-    ]
+      ],
+      "steps": [
+        {
+          "id": "c9c9484f-9e0b-4a25-b5d9-803d8b062d4a",
+          "title": "main",
+          "entries": [
+            "Cook spaghetti according to package instructions.",
+            "Brown the beef in a pan.",
+            "Add tomato sauce and simmer 15 minutes.",
+            "Serve sauce over pasta."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "276d623b-eb47-44c7-8cff-2d6280ff3a35",
+      "title": "Green Curry",
+      "description": "my favorite thai dish",
+      "cuisine": "thai",
+      "ingredients": [
+        {
+          "id": "feecf983-0e61-4c27-b072-d16feae79b9c",
+          "title": "curry",
+          "entries": [
+            { "item": "thai basil", "quantity": "1", "unit": "bunch" },
+            { "item": "coconut milk", "quantity": "250", "unit": "mL" }
+          ]
+        },
+        {
+          "id": "46f97fda-c411-4850-99ab-dcb22df46c4b",
+          "title": "main",
+          "entries": [
+            { "item": "rice", "quantity": "1", "unit": "c" },
+            { "item": "chicken", "quantity": "300", "unit": "g" },
+            { "item": "salt, to taste", "quantity": "", "unit": "" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "758e2b3f-bd77-461f-9cf1-680af9c49060",
+          "title": "curry",
+          "entries": ["make the curry"]
+        },
+        {
+          "id": "9efa1e27-d4cd-40b5-a4e2-114161dc97ca",
+          "title": "main",
+          "entries": ["Do curry stuff.", "Eat the curry."]
+        }
+      ]
+    },
+    {
+      "id": "b1b51b60-f659-426d-ab14-b2a115ee9964",
+      "title": "Pozole",
+      "description": "for when hungover",
+      "cuisine": "mexican",
+      "ingredients": [
+        {
+          "id": "d2d56002-766a-4f06-9f74-cf447ee4f13b",
+          "title": "main",
+          "entries": [{ "item": "pork", "quantity": "1", "unit": "kg" }]
+        }
+      ],
+      "steps": [
+        {
+          "id": "7202edea-9505-4243-ae03-284a3c8ea5fc",
+          "title": "main",
+          "entries": ["make the pozole.", "eat the pozole."]
+        }
+      ]
+    }
+  ]
 }

@@ -25,10 +25,7 @@ function App() {
   return (
     <AppProvider>
       <div className={styles.app}>
-        <Sidebar
-          recipes={recipes}
-        />
-
+        <Sidebar recipes={recipes} />
         <MainContent />
       </div>
     </AppProvider>

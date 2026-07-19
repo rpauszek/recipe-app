@@ -49,6 +49,7 @@ function IngredientEditor({ index, ingredient, callbacks, inputRef }: Ingredient
       <button className={button} onClick={() => callbacks.addIngredient(index)}>
         ➕
       </button>
+      {/* todo: if only 1 entry, disable remove button */}
       <button className={button} onClick={() => callbacks.removeIngredient(index)}>
         ❌
       </button>

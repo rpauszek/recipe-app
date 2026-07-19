@@ -1,31 +1,36 @@
+export interface RecipeCollection {
+  recipes: Recipe[];
+}
+
+export interface Recipe {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  cuisine: string;
+  ingredients: IngredientList[];
+  steps: StepsList[];
+}
+export type RecipeDraft = Recipe;
+
+export interface BaseList<T> {
+  id: string;
+  title: string;
+  entries: T[];
+}
+
+export type IngredientList = BaseList<Ingredient>
+export type StepsList = BaseList<string>
+
 export interface Ingredient {
   item: string;
   quantity: string;
   unit: string;
 }
 
-export interface Recipe {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  cuisine: string;
-  ingredients: Record<string, Ingredient[]>;
-  steps: Record<string, string[]>;
-}
-export type RecipeDraft = Omit<Recipe, "id">;
-
-export interface RecipeCollection {
-  recipes: Recipe[];
-}
-
-// context types
-export type AppMode = "view" | "edit";
-export type EditKind = "new" | "existing";
-
 // alias React events
-export type InputChangeEvt = React.ChangeEvent<HTMLInputElement>;
-export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement>;
+export type InputChangeEvt = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+export type InputKeyBoardEvt = React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 // styling interfaces
 export interface Color {

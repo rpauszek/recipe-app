@@ -1,14 +1,18 @@
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
-import { AppMode, EditKind, Recipe } from "utils/types";
+import { createContext, useContext } from "react";
+import { Recipe } from "utils/types";
+
+export type AppMode = "view" | "edit";
+export type EditKind = "new" | "existing";
 
 export interface AppState {
   mode: AppMode;
-  setMode: Dispatch<SetStateAction<AppMode>>;
   isEditing: boolean;
   editKind: EditKind;
-  setEditKind: Dispatch<SetStateAction<EditKind>>;
   selectedRecipe: Recipe | null;
-  setSelectedRecipe: Dispatch<SetStateAction<Recipe | null>>;
+  selectRecipe: (recipe: Recipe) => void;
+  createNewRecipe: () => void;
+  editSelectedRecipe: () => void;
+  finishEditing: () => void;
 }
 
 export const AppContext = createContext<AppState | null>(null);

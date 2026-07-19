@@ -1,16 +1,14 @@
 import * as styles from "styles/sidebar.css";
-import { logger } from "utils/logger";
 import { useApp } from "app/AppContext";
 
 function NewRecipeButton() {
-  const { isEditing, setMode } = useApp();
+  const { isEditing, createNewRecipe } = useApp();
 
   return (
     <button
       className={styles.newRecipeButton({ disabled: isEditing })}
       onClick={() => {
-        setMode("edit");
-        logger.info("clicked");
+        createNewRecipe();
       }}
       disabled={isEditing}
     >
